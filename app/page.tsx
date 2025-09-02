@@ -12,8 +12,8 @@ import LoanCalculatorPage from '@/components/sections/Loan';
 import SellGoldPage from '@/components/sections/SellGold';
 import Services from '@/components/sections/Services';
 import Testimonials from '@/components/sections/Testimonials';
-import { useEffect, useState } from 'react';
 import { scrollToSection } from '@/lib/utils';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);

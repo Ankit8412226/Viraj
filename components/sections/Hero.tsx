@@ -2,8 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Award, Clock, Shield, TrendingUp } from 'lucide-react';
 import { scrollToSection } from '@/lib/utils';
+import { ArrowRight, Award, Clock, Shield, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface HeroProps {
@@ -172,7 +172,7 @@ export default function Hero({ scrollY }: HeroProps) {
 
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
-              <div 
+              <div
                 onClick={() => scrollToSection('#loan-calculator')}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
@@ -181,7 +181,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 </div>
                 <p className="text-sm font-medium text-amber-200">Gold Loans</p>
               </div>
-              <div 
+              <div
                 onClick={() => scrollToSection('#services')}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
@@ -190,7 +190,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 </div>
                 <p className="text-sm font-medium text-amber-200">Silver Loans</p>
               </div>
-              <div 
+              <div
                 onClick={() => scrollToSection('#services')}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
@@ -269,7 +269,7 @@ export default function Hero({ scrollY }: HeroProps) {
 
         {/* Features Banner */}
         <div className="mt-20 grid md:grid-cols-4 gap-6">
-          <div 
+          <div
             onClick={() => scrollToSection('#loan-calculator')}
             className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
           >
@@ -280,7 +280,7 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">Up to 85% of market value</p>
           </div>
 
-          <div 
+          <div
             onClick={() => scrollToSection('#sell-gold')}
             className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
           >
@@ -291,7 +291,7 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">Get cash in 15 minutes</p>
           </div>
 
-          <div 
+          <div
             onClick={() => scrollToSection('#gold-check')}
             className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
           >
@@ -302,7 +302,7 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">RBI registered & insured</p>
           </div>
 
-          <div 
+          <div
             onClick={() => scrollToSection('#doorstep-service')}
             className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
           >
