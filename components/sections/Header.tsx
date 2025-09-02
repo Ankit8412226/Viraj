@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { DollarSign, MapPin, Menu, Phone, X } from 'lucide-react';
+import { scrollToSection } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
@@ -16,16 +17,10 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scrolling function
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-    setIsMenuOpen(false); // Close mobile menu after clicking
+  // Close mobile menu after clicking
+  const handleSectionClick = (sectionId: string) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false);
   };
 
   const navItems = [
@@ -85,7 +80,7 @@ export default function Header() {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleSectionClick(item.href)}
                 className={`transition-colors duration-300 hover:text-yellow-600 cursor-pointer ${
                   isScrolled ? 'text-gray-700' : 'text-white'
                 }`}
@@ -93,6 +88,7 @@ export default function Header() {
                 {item.name}
               </button>
             ))}
+
             <Button
               onClick={() => scrollToSection('#sell-gold')}
               className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-semibold px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer"
@@ -121,12 +117,13 @@ export default function Header() {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleSectionClick(item.href)}
                 className="block w-full text-left py-3 text-gray-700 hover:text-yellow-600 transition-colors duration-300 cursor-pointer"
               >
                 {item.name}
               </button>
             ))}
+
             <Button
               onClick={() => scrollToSection('#sell-gold')}
               className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2 rounded-full cursor-pointer"

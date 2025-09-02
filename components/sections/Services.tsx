@@ -94,6 +94,15 @@ export default function Services() {
                 </div>
 
                 <Button
+                  onClick={() => {
+                    if (service.title === "Gold Loans") {
+                      document.getElementById('loan-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (service.title === "Silver Loans") {
+                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (service.title === "Diamond Loans") {
+                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                   className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg transform transition-all duration-300 hover:scale-105 text-white font-semibold rounded-full`}
                 >
                   Learn More
@@ -140,6 +149,7 @@ export default function Services() {
           </div>
           <Button
             size="lg"
+            onClick={() => document.getElementById('loan-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
             className="bg-white text-amber-700 hover:bg-yellow-50 font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105"
           >
             <Calculator className="mr-2 h-5 w-5" />

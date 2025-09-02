@@ -1,10 +1,10 @@
 'use client';
 
-import { MapPin, Phone, Mail, Clock, Car, Building } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Building, Car, Clock, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Contact() {
   const contactInfo = [
@@ -74,7 +74,7 @@ export default function Contact() {
                   <Input placeholder="Enter your phone number" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                 <Input type="email" placeholder="Enter your email address" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
@@ -98,7 +98,7 @@ export default function Contact() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Additional Details</label>
-                <Textarea 
+                <Textarea
                   placeholder="Any specific requirements or questions..."
                   className="border-amber-200 focus:border-amber-500 focus:ring-amber-500 min-h-[100px]"
                 />

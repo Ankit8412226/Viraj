@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Award, Clock, Shield, TrendingUp } from 'lucide-react';
+import { scrollToSection } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 interface HeroProps {
@@ -29,16 +30,7 @@ export default function Hero({ scrollY }: HeroProps) {
     return () => clearInterval(timer);
   }, [jewelryImages.length]);
 
-  // Smooth scrolling function
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
+
 
   // Real-time market rates based on current data from September 2, 2025
   const marketRates = [
@@ -135,21 +127,73 @@ export default function Hero({ scrollY }: HeroProps) {
               </Button>
             </div>
 
+            {/* Additional Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                onClick={() => scrollToSection('#doorstep-service')}
+                className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-amber-400/50 cursor-pointer"
+              >
+                Schedule Home Visit
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button
+                size="lg"
+                onClick={() => scrollToSection('#gold-check')}
+                className="bg-white/20 backdrop-blur-sm border-2 border-yellow-300 text-yellow-100 hover:bg-yellow-400 hover:text-amber-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 cursor-pointer"
+              >
+                Check Gold Value
+              </Button>
+            </div>
+
+            {/* Learn More Button */}
+            <div className="flex justify-center">
+              <Button
+                size="lg"
+                onClick={() => scrollToSection('#services')}
+                className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-300/50 cursor-pointer"
+              >
+                Learn More About Our Services
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Visit Office Button */}
+            <div className="flex justify-center">
+              <Button
+                size="lg"
+                onClick={() => scrollToSection('#contact')}
+                className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-orange-400/50 cursor-pointer"
+              >
+                Visit Our Office
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
-              <div className="text-center group cursor-pointer">
+              <div 
+                onClick={() => scrollToSection('#loan-calculator')}
+                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
+              >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
                   <span className="text-2xl">🏅</span>
                 </div>
                 <p className="text-sm font-medium text-amber-200">Gold Loans</p>
               </div>
-              <div className="text-center group cursor-pointer">
+              <div 
+                onClick={() => scrollToSection('#services')}
+                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
+              >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-gray-200 to-gray-400 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
                   <span className="text-2xl">⚪</span>
                 </div>
                 <p className="text-sm font-medium text-amber-200">Silver Loans</p>
               </div>
-              <div className="text-center group cursor-pointer">
+              <div 
+                onClick={() => scrollToSection('#services')}
+                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
+              >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
                   <span className="text-2xl">💎</span>
                 </div>
@@ -225,7 +269,10 @@ export default function Hero({ scrollY }: HeroProps) {
 
         {/* Features Banner */}
         <div className="mt-20 grid md:grid-cols-4 gap-6">
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30">
+          <div 
+            onClick={() => scrollToSection('#loan-calculator')}
+            className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
+          >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
               <span className="text-2xl">🏆</span>
             </div>
@@ -233,7 +280,10 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">Up to 85% of market value</p>
           </div>
 
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30">
+          <div 
+            onClick={() => scrollToSection('#sell-gold')}
+            className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
+          >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
               <Clock className="w-6 h-6" />
             </div>
@@ -241,7 +291,10 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">Get cash in 15 minutes</p>
           </div>
 
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30">
+          <div 
+            onClick={() => scrollToSection('#gold-check')}
+            className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
+          >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
               <Shield className="w-6 h-6" />
             </div>
@@ -249,7 +302,10 @@ export default function Hero({ scrollY }: HeroProps) {
             <p className="text-sm text-amber-200">RBI registered & insured</p>
           </div>
 
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30">
+          <div 
+            onClick={() => scrollToSection('#doorstep-service')}
+            className="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center text-white hover:bg-white/30 transition-all duration-300 border border-yellow-300/30 cursor-pointer transform hover:scale-105"
+          >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
               <span className="text-2xl">🚪</span>
             </div>
