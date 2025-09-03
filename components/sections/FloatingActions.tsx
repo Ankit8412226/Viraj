@@ -2,15 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import {
-    Calculator,
-    ChevronUp,
-    DollarSign,
-    Home,
-    MapPin,
-    MessageSquare,
-    Scale
+  Calculator,
+  ChevronUp,
+  DollarSign,
+  Home,
+  MapPin,
+  MessageSquare,
+  Scale
 } from 'lucide-react';
-import { scrollToSection } from '@/lib/utils';
 import { useState } from 'react';
 
 export default function FloatingActions() {
@@ -45,12 +44,31 @@ export default function FloatingActions() {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {/* Main Floating Button */}
-      <Button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
-      >
-        <MapPin className="h-6 w-6" />
-      </Button>
+      <div className="hidden lg:block">
+        <Button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
+        >
+          <MapPin className="h-6 w-6" />
+        </Button>
+      </div>
+      {/* On small screens show two quick action buttons with gap */}
+      <div className="flex lg:hidden gap-3">
+        <Button
+          onClick={() => scrollToSection('doorstep-service')}
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-xl"
+          title="Home Visit"
+        >
+          <Home className="h-5 w-5" />
+        </Button>
+        <Button
+          onClick={() => scrollToSection('contact')}
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-xl"
+          title="Contact"
+        >
+          <MessageSquare className="h-5 w-5" />
+        </Button>
+      </div>
 
       {/* Expanded Action Buttons */}
       {isExpanded && (
@@ -70,13 +88,15 @@ export default function FloatingActions() {
       )}
 
       {/* Scroll to Top Button */}
-      <Button
-        onClick={scrollToTop}
-        className="mt-3 w-16 h-16 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
-        title="Scroll to Top"
-      >
-        <ChevronUp className="h-6 w-6" />
-      </Button>
+      <div className="hidden lg:block">
+        <Button
+          onClick={scrollToTop}
+          className="mt-3 w-16 h-16 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
+          title="Scroll to Top"
+        >
+          <ChevronUp className="h-6 w-6" />
+        </Button>
+      </div>
     </div>
   );
 }

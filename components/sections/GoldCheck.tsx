@@ -86,8 +86,9 @@ export default function GoldCheck() {
       } else {
         toast.error(data.error || 'Failed to process gold check');
       }
-    } catch (error) {
-      toast.error('Network error. Please try again.');
+    } catch (error: any) {
+      const message = error?.message || 'Network error. Please try again.';
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -236,7 +237,7 @@ export default function GoldCheck() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button type="submit" className="flex-1" disabled={loading}>
+                  <Button type="submit" className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white" disabled={loading}>
                     {loading ? 'Processing...' : 'Check Gold Value'}
                   </Button>
                   <Button type="button" variant="outline" onClick={resetForm}>

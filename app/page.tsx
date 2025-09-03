@@ -1,6 +1,7 @@
 'use client';
 
 import About from '@/components/sections/About';
+import Banner from '@/components/sections/Banner';
 import Contact from '@/components/sections/Contact';
 import DoorStepService from '@/components/sections/DoorStepService';
 import FloatingActions from '@/components/sections/FloatingActions';
@@ -36,6 +37,7 @@ export default function Home() {
       <div id="gold-check">
         <GoldCheck />
       </div>
+      <Banner />
       <div id="doorstep-service">
         <DoorStepService />
       </div>

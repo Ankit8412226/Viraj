@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { DollarSign, MapPin, Menu, Phone, X } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
+import { DollarSign, MapPin, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -17,9 +17,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu after clicking
+  // Close mobile menu after clicking and smooth scroll
   const handleSectionClick = (sectionId: string) => {
-    scrollToSection(sectionId);
+    const id = sectionId.startsWith('#') ? sectionId.slice(1) : sectionId;
+    scrollToSection(id);
     setIsMenuOpen(false);
   };
 
@@ -44,11 +45,11 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4" />
-              <span>+91-9350564449</span>
+              <span>+91-9876543210</span>
             </div>
             <div className="flex items-center space-x-2">
               <MapPin className="h-4 w-4" />
-              <span>LAJPAT NAGAR - II, NEW DELHI - 110024</span>
+              <span>123 Jewelry Street, Mumbai</span>
             </div>
           </div>
           <div className="hidden md:block">
@@ -98,7 +99,7 @@ export default function Header() {
             ))}
 
             <Button
-              onClick={() => scrollToSection("#sell-gold")}
+              onClick={() => scrollToSection("sell-gold")}
               className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-semibold px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer"
             >
               <DollarSign className="mr-2 h-4 w-4" />
@@ -141,7 +142,7 @@ export default function Header() {
             ))}
 
             <Button
-              onClick={() => scrollToSection("#sell-gold")}
+              onClick={() => scrollToSection("sell-gold")}
               className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2 rounded-full cursor-pointer"
             >
               <DollarSign className="mr-2 h-4 w-4" />

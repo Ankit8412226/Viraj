@@ -74,8 +74,9 @@ export default function DoorStepService() {
       } else {
         toast.error(data.error || 'Failed to submit service request');
       }
-    } catch (error) {
-      toast.error('Network error. Please try again.');
+    } catch (error: any) {
+      const message = error?.message || 'Network error. Please try again.';
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -96,7 +97,7 @@ export default function DoorStepService() {
   };
 
   return (
-    <section id='#doorstep-service' className="py-16 bg-gradient-to-b from-blue-50 to-white">
+    <section id='doorstep-service' className="py-16 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -113,7 +114,7 @@ export default function DoorStepService() {
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Home className="h-6 w-6 text-blue-600" />
+                <Home className="h-6 w-6 text-amber-600" />
                 Schedule Door-Step Service
               </CardTitle>
               <CardDescription>
@@ -237,7 +238,7 @@ export default function DoorStepService() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button type="submit" className="flex-1" disabled={loading}>
+                  <Button type="submit" className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white" disabled={loading}>
                     {loading ? 'Scheduling...' : 'Schedule Service'}
                   </Button>
                   <Button type="button" variant="outline" onClick={resetForm}>
@@ -251,13 +252,13 @@ export default function DoorStepService() {
           {/* Results Section */}
           <div className="space-y-6">
             {result && (
-              <Card className="shadow-lg border-blue-200">
-                <CardHeader className="bg-blue-50">
-                  <CardTitle className="flex items-center gap-2 text-blue-800">
+              <Card className="shadow-lg border-amber-200">
+                <CardHeader className="bg-amber-50">
+                  <CardTitle className="flex items-center gap-2 text-amber-800">
                     <CheckCircle className="h-6 w-6" />
                     Service Scheduled Successfully!
                   </CardTitle>
-                  <CardDescription className="text-blue-700">
+                  <CardDescription className="text-amber-700">
                     Your door-step service has been scheduled
                   </CardDescription>
                 </CardHeader>
@@ -305,28 +306,28 @@ export default function DoorStepService() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Home className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <Home className="h-5 w-5 text-amber-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium">Convenience</h4>
                     <p className="text-sm text-gray-600">No need to travel to our store</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Calendar className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <Calendar className="h-5 w-5 text-amber-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium">Flexible Scheduling</h4>
                     <p className="text-sm text-gray-600">Choose your preferred date and time</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Clock className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <Clock className="h-5 w-5 text-amber-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium">Quick Service</h4>
                     <p className="text-sm text-gray-600">Same-day service available</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <MapPin className="h-5 w-5 text-amber-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium">Wide Coverage</h4>
                     <p className="text-sm text-gray-600">Service available across the city</p>

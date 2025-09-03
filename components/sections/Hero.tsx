@@ -38,7 +38,7 @@ export default function Hero({ scrollY }: HeroProps) {
 
   return (
     <section
-      id="#home"
+      id="home"
       className="relative min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 overflow-hidden"
     >
       {/* Sliding Background Images - Made More Visible */}
@@ -77,21 +77,21 @@ export default function Hero({ scrollY }: HeroProps) {
       <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="text-white space-y-8">
-            <div className="space-y-6">
+          <div className="text-white space-y-8 text-center md:text-left">
+            <div className="space-y-6 animate-in fade-in-50 slide-in-from-bottom-4 duration-700">
               <h1 className="text-5xl md:text-6xl font-bold leading-tight drop-shadow-2xl">
-                <span className="block text-amber-100 drop-shadow-lg">
+                <span className="block text-amber-100 drop-shadow-lg animate-in slide-in-from-left-8 duration-700">
                   Transform Your
                 </span>
-                <span className="block bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg">
+                <span className="block bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg animate-in slide-in-from-right-8 duration-700 delay-150">
                   Precious Jewelry
                 </span>
-                <span className="block text-yellow-300 font-extrabold drop-shadow-lg">
+                <span className="block text-yellow-300 font-extrabold drop-shadow-lg animate-in slide-in-from-left-8 duration-700 delay-300">
                   Into Instant Cash
                 </span>
               </h1>
 
-              <p className="text-xl text-amber-100 leading-relaxed max-w-lg drop-shadow-lg">
+              <p className="text-xl text-amber-100 leading-relaxed max-w-lg mx-auto md:mx-0 drop-shadow-lg animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-150">
                 Premium gold loans, jewelry buying, and expert valuation
                 services. Your trusted partner for precious metal transactions
                 since 1985.
@@ -99,7 +99,7 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-6 justify-center md:justify-start animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-300">
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-yellow-300/50 shadow-lg">
                 <Shield className="h-5 w-5 text-yellow-300" />
                 <span className="text-sm font-medium drop-shadow-sm">
@@ -120,8 +120,8 @@ export default function Hero({ scrollY }: HeroProps) {
               </div>
             </div>
 
-            {/* CTA Buttons with Smooth Scrolling */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* CTA Buttons with Smooth Scrolling (hidden on mobile) */}
+            <div className="hidden md:flex flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-500">
               <Button
                 size="lg"
                 onClick={() => scrollToSection("#loan-calculator")}
@@ -140,11 +140,11 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Additional Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="hidden md:flex flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-700">
               <Button
                 size="lg"
                 onClick={() => scrollToSection("#doorstep-service")}
-                className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-amber-400/50 cursor-pointer"
+                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
               >
                 Schedule Home Visit
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -152,14 +152,14 @@ export default function Hero({ scrollY }: HeroProps) {
               <Button
                 size="lg"
                 onClick={() => scrollToSection("#gold-check")}
-                className="bg-white/30 backdrop-blur-md border-2 border-yellow-300 text-yellow-100 hover:bg-yellow-400 hover:text-amber-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 cursor-pointer shadow-lg"
+                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
               >
                 Check Gold Value
               </Button>
             </div>
 
             {/* Learn More Button */}
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-1000">
               <Button
                 size="lg"
                 onClick={() => scrollToSection("#services")}
@@ -171,10 +171,10 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Visit Office Button */}
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-1000">
               <Button
                 size="lg"
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => window.open('https://maps.google.com/?q=Viraj+Jewellers+Lajpat+Nagar', '_blank')}
                 className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-orange-400/50 cursor-pointer"
               >
                 Visit Our Office
