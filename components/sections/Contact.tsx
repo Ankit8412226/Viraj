@@ -3,10 +3,25 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Building, Car, Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+    preferredContact: 'email',
+    inquiryType: 'general'
+  });
+  const [loading, setLoading] = useState(false);
+
   const contactInfo = [
     {
       icon: <Phone className="h-6 w-6 text-amber-600" />,
@@ -43,8 +58,48 @@ export default function Contact() {
     }
   ];
 
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Contact form submitted successfully!');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          preferredContact: 'email',
+          inquiryType: 'general'
+        });
+      } else {
+        toast.error(data.error || 'Failed to submit contact form');
+      }
+    } catch (error: any) {
+      toast.error('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <section id="#contact" className="py-20 bg-gradient-to-b from-amber-50 to-amber-100">
+    <section id="contact" className="py-20 bg-gradient-to-b from-amber-50 to-amber-100">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -63,55 +118,104 @@ export default function Contact() {
               <CardTitle className="text-2xl font-bold">Get Free Quote</CardTitle>
               <p className="text-amber-100">Fill out the form and we'll contact you within 30 minutes</p>
             </CardHeader>
-            <CardContent className="p-8 space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                  <Input placeholder="Enter your full name" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
+            <CardContent className="p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name *</Label>
+                    <Input 
+                      id="name"
+                      placeholder="Enter your full name" 
+                      className="border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input 
+                      id="phone"
+                      placeholder="Enter your phone number" 
+                      className="border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                  <Input placeholder="Enter your phone number" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input 
+                    id="email"
+                    type="email" 
+                    placeholder="Enter your email address" 
+                    className="border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    required
+                  />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <Input type="email" placeholder="Enter your email address" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="subject">Subject *</Label>
+                  <Input 
+                    id="subject"
+                    placeholder="Enter subject" 
+                    className="border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                    value={formData.subject}
+                    onChange={(e) => handleInputChange('subject', e.target.value)}
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Jewelry Type</label>
-                <select className="w-full p-3 border border-amber-200 rounded-md focus:border-amber-500 focus:ring-amber-500 bg-white">
-                  <option>Select jewelry type</option>
-                  <option>Gold Jewelry</option>
-                  <option>Silver Jewelry</option>
-                  <option>Diamond Jewelry</option>
-                  <option>Mixed Jewelry</option>
-                </select>
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="inquiryType">Inquiry Type</Label>
+                  <Select value={formData.inquiryType} onValueChange={(value) => handleInputChange('inquiryType', value)}>
+                    <SelectTrigger className="border-amber-200 focus:border-amber-500">
+                      <SelectValue placeholder="Select inquiry type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="general">General Inquiry</SelectItem>
+                      <SelectItem value="gold-check">Gold Check</SelectItem>
+                      <SelectItem value="gold-sell">Gold Selling</SelectItem>
+                      <SelectItem value="loan">Loan Application</SelectItem>
+                      <SelectItem value="urgent">Urgent</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Approximate Weight/Value</label>
-                <Input placeholder="e.g., 50 grams gold or ₹2,00,000" className="border-amber-200 focus:border-amber-500 focus:ring-amber-500" />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="message">Message *</Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Any specific requirements or questions..."
+                    className="border-amber-200 focus:border-amber-500 focus:ring-amber-500 min-h-[100px]"
+                    value={formData.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Details</label>
-                <Textarea
-                  placeholder="Any specific requirements or questions..."
-                  className="border-amber-200 focus:border-amber-500 focus:ring-amber-500 min-h-[100px]"
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-bold py-3 rounded-full transform transition-all duration-300 hover:scale-105">
-                  Request Doorstep Service
-                </Button>
-                <Button variant="outline" className="flex-1 border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-3 rounded-full transition-all duration-300">
-                  Call for Instant Quote
-                </Button>
-              </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-bold py-3 rounded-full transform transition-all duration-300 hover:scale-105"
+                    disabled={loading}
+                  >
+                    {loading ? 'Sending...' : 'Send Message'}
+                  </Button>
+                  <Button 
+                    type="button"
+                    variant="outline" 
+                    className="flex-1 border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-3 rounded-full transition-all duration-300"
+                    onClick={() => window.open('tel:+919350564449')}
+                  >
+                    Call for Instant Quote
+                  </Button>
+                </div>
+              </form>
             </CardContent>
           </Card>
 
@@ -131,7 +235,19 @@ export default function Contact() {
                         {info.details.map((detail, idx) => (
                           <p key={idx} className="text-gray-600 mb-1">{detail}</p>
                         ))}
-                        <Button variant="link" className="text-amber-600 hover:text-amber-700 p-0 h-auto font-semibold">
+                        <Button 
+                          variant="link" 
+                          className="text-amber-600 hover:text-amber-700 p-0 h-auto font-semibold"
+                          onClick={() => {
+                            if (info.title === 'Phone') {
+                              window.open('tel:+919350564449');
+                            } else if (info.title === 'Email') {
+                              window.open('mailto:info@virajjewellers.com');
+                            } else if (info.title === 'Office Address') {
+                              window.open('https://maps.google.com/?q=Lajpat+Nagar+Delhi');
+                            }
+                          }}
+                        >
                           {info.action} →
                         </Button>
                       </div>
@@ -170,7 +286,10 @@ export default function Contact() {
               <CardContent className="p-6 text-center">
                 <h4 className="font-bold text-xl mb-2">Emergency Loan Service</h4>
                 <p className="text-red-100 mb-4">Need urgent cash? We're available 24/7 for emergency loans</p>
-                <Button className="bg-white text-red-600 hover:bg-red-50 font-bold rounded-full">
+                <Button 
+                  className="bg-white text-red-600 hover:bg-red-50 font-bold rounded-full"
+                  onClick={() => window.open('tel:+919350564449')}
+                >
                   Call Emergency Line
                 </Button>
               </CardContent>

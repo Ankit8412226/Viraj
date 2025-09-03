@@ -25,10 +25,11 @@ export default function Header() {
   };
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "home" },
+    { name: "Gold Check", href: "gold-check" },
+    { name: "Services", href: "services" },
+    { name: "About", href: "about" },
+    { name: "Contact", href: "contact" },
   ];
 
   return (
@@ -45,15 +46,15 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4" />
-              <span>+91-9876543210</span>
+              <span>+91-9350564449</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="hidden md:flex items-center space-x-2">
               <MapPin className="h-4 w-4" />
-              <span>123 Jewelry Street, Mumbai</span>
+              <span>Lajpat Nagar, New Delhi</span>
             </div>
           </div>
           <div className="hidden md:block">
-            <span>  Best Gold Prices Today: ₹10,609/gram </span>
+            <span className="animate-pulse">🔥 Best Gold Prices Today: ₹10,609/gram</span>
           </div>
         </div>
       </div>
@@ -62,7 +63,10 @@ export default function Header() {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div 
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => scrollToSection("home")}
+          >
             <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-lg">V</span>
             </div>
@@ -90,7 +94,7 @@ export default function Header() {
               <button
                 key={item.name}
                 onClick={() => handleSectionClick(item.href)}
-                className={`transition-colors duration-300 hover:text-yellow-600 cursor-pointer ${
+                className={`transition-colors duration-300 hover:text-yellow-600 cursor-pointer font-medium ${
                   isScrolled ? "text-gray-700" : "text-white"
                 }`}
               >
@@ -135,14 +139,17 @@ export default function Header() {
               <button
                 key={item.name}
                 onClick={() => handleSectionClick(item.href)}
-                className="block w-full text-left py-3 text-gray-700 hover:text-yellow-600 transition-colors duration-300 cursor-pointer"
+                className="block w-full text-left py-3 text-gray-700 hover:text-yellow-600 transition-colors duration-300 cursor-pointer font-medium"
               >
                 {item.name}
               </button>
             ))}
 
             <Button
-              onClick={() => scrollToSection("sell-gold")}
+              onClick={() => {
+                scrollToSection("sell-gold");
+                setIsMenuOpen(false);
+              }}
               className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2 rounded-full cursor-pointer"
             >
               <DollarSign className="mr-2 h-4 w-4" />

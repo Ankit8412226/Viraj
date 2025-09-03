@@ -1,72 +1,157 @@
 'use client';
 
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowRight, Award, Calculator, Camera, Clock, DollarSign, Shield, TrendingUp } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { ArrowRight, Award, Calculator, Camera, CheckCircle, Clock, DollarSign, Shield, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+
+interface SellGoldResult {
+  transactionId: string;
+  customerName: string;
+  customerPhone: string;
+  goldType: string;
+  weight: number;
+  sellingPrice: number;
+  goldValue: number;
+  status: string;
+}
 
 export default function SellGoldPage() {
-  const [goldWeight, setGoldWeight] = useState('');
-  const [goldPurity, setGoldPurity] = useState('22');
+  const [formData, setFormData] = useState({
+    customerName: '',
+    customerPhone: '',
+    customerEmail: '',
+    customerAddress: '',
+    goldType: '',
+    weight: '',
+    purity: '',
+    currentPrice: '6500',
+    sellingPrice: '',
+    idProof: '',
+    idNumber: ''
+  });
+  const [result, setResult] = useState<SellGoldResult | null>(null);
+  const [loading, setLoading] = useState(false);
   const [estimatedValue, setEstimatedValue] = useState(0);
-  const [deductions, setDeductions] = useState(0);
-  const [finalAmount, setFinalAmount] = useState(0);
 
   // Current market rates
   const goldRates = {
-    '24': 6200,
-    '22': 5800,
-    '18': 4650,
-    '14': 3600,
-    '10': 2580
+    '24k': { rate: 6500, purity: 99.9 },
+    '22k': { rate: 6200, purity: 91.7 },
+    '18k': { rate: 4650, purity: 75.0 },
+    '14k': { rate: 3600, purity: 58.3 },
+    '10k': { rate: 2580, purity: 41.7 }
   };
 
-  const makingChargeDeduction = 0.15; // 15% deduction for making charges
-  const wastageDeduction = 0.05; // 5% wastage
-
   const calculateValue = () => {
-    if (goldWeight) {
-      const weight = parseFloat(goldWeight);
-      const ratePerGram = goldRates[goldPurity as keyof typeof goldRates];
-      const grossValue = weight * ratePerGram;
-      const totalDeduction = grossValue * (makingChargeDeduction + wastageDeduction);
-      const netValue = grossValue - totalDeduction;
-
-      setEstimatedValue(Math.round(grossValue));
-      setDeductions(Math.round(totalDeduction));
-      setFinalAmount(Math.round(netValue));
+    if (formData.weight && formData.goldType && formData.currentPrice) {
+      const weight = parseFloat(formData.weight);
+      const price = parseFloat(formData.currentPrice);
+      const goldInfo = goldRates[formData.goldType as keyof typeof goldRates];
+      
+      if (goldInfo) {
+        const grossValue = weight * price;
+        const deductions = grossValue * 0.20; // 20% total deductions
+        const netValue = grossValue - deductions;
+        
+        setEstimatedValue(Math.round(netValue));
+        setFormData(prev => ({ 
+          ...prev, 
+          purity: goldInfo.purity.toString(),
+          sellingPrice: Math.round(netValue).toString()
+        }));
+      }
     }
   };
 
   useEffect(() => {
     calculateValue();
-  }, [goldWeight, goldPurity]);
+  }, [formData.weight, formData.goldType, formData.currentPrice]);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/gold-sell', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          weight: parseFloat(formData.weight),
+          purity: parseFloat(formData.purity),
+          currentPrice: parseFloat(formData.currentPrice),
+          sellingPrice: parseFloat(formData.sellingPrice)
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult(data.data);
+        toast.success('Gold selling request submitted successfully!');
+      } else {
+        toast.error(data.error || 'Failed to submit gold selling request');
+      }
+    } catch (error: any) {
+      toast.error('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      customerName: '',
+      customerPhone: '',
+      customerEmail: '',
+      customerAddress: '',
+      goldType: '',
+      weight: '',
+      purity: '',
+      currentPrice: '6500',
+      sellingPrice: '',
+      idProof: '',
+      idNumber: ''
+    });
+    setResult(null);
+    setEstimatedValue(0);
+  };
 
   const currentRates = [
-    { karat: '24K', rate: goldRates['24'], change: '+2.3%', color: 'text-green-600' },
-    { karat: '22K', rate: goldRates['22'], change: '+2.1%', color: 'text-green-600' },
-    { karat: '18K', rate: goldRates['18'], change: '+1.8%', color: 'text-green-600' },
-    { karat: '14K', rate: goldRates['14'], change: '+1.5%', color: 'text-green-600' },
-    { karat: '10K', rate: goldRates['10'], change: '+1.2%', color: 'text-green-600' },
+    { karat: '24K', rate: goldRates['24k'].rate, change: '+2.3%', color: 'text-green-600' },
+    { karat: '22K', rate: goldRates['22k'].rate, change: '+2.1%', color: 'text-green-600' },
+    { karat: '18K', rate: goldRates['18k'].rate, change: '+1.8%', color: 'text-green-600' },
+    { karat: '14K', rate: goldRates['14k'].rate, change: '+1.5%', color: 'text-green-600' },
+    { karat: '10K', rate: goldRates['10k'].rate, change: '+1.2%', color: 'text-green-600' },
   ];
 
   return (
-    <div id='#sell-gold' className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 ">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <DollarSign className="h-16 w-16 mx-auto mb-6 text-yellow-100" />
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+    <div id='sell-gold' className="py-16 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <DollarSign className="h-16 w-16 mx-auto mb-6 text-yellow-500" />
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Sell Your Old Gold
-          </h1>
-          <p className="text-xl text-yellow-100 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get the best market prices for your old gold jewelry with instant cash payment
           </p>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Current Gold Rates */}
           <div className="lg:col-span-1">
@@ -108,245 +193,202 @@ export default function SellGoldPage() {
             </Card>
           </div>
 
-          {/* Calculator and Process */}
+          {/* Form and Results */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Value Calculator */}
-            <Card className="bg-white shadow-xl border border-yellow-200">
-              <CardHeader className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white">
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <Calculator className="h-6 w-6 mr-3" />
-                  Estimate Your Gold Value
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-8 space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Gold Weight (in grams)
-                    </label>
-                    <Input
-                      type="number"
-                      placeholder="Enter weight"
-                      value={goldWeight}
-                      onChange={(e) => setGoldWeight(e.target.value)}
-                      className="text-lg border-2 border-yellow-200 focus:border-yellow-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Gold Purity/Karat
-                    </label>
-                    <select
-                      value={goldPurity}
-                      onChange={(e) => setGoldPurity(e.target.value)}
-                      className="w-full p-3 text-lg border-2 border-yellow-200 rounded-md focus:border-yellow-500 bg-white"
-                    >
-                      <option value="10">10K Gold (₹{goldRates['10']}/g)</option>
-                      <option value="14">14K Gold (₹{goldRates['14']}/g)</option>
-                      <option value="18">18K Gold (₹{goldRates['18']}/g)</option>
-                      <option value="22">22K Gold (₹{goldRates['22']}/g)</option>
-                      <option value="24">24K Gold (₹{goldRates['24']}/g)</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Value Breakdown */}
-                <div className="grid md:grid-cols-3 gap-4">
-                  <Card className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-                    <CardContent className="p-4 text-center">
-                      <h4 className="text-sm font-medium mb-1">Gross Value</h4>
-                      <p className="text-2xl font-bold">₹{estimatedValue.toLocaleString('en-IN')}</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-r from-red-500 to-pink-600 text-white">
-                    <CardContent className="p-4 text-center">
-                      <h4 className="text-sm font-medium mb-1">Deductions</h4>
-                      <p className="text-2xl font-bold">₹{deductions.toLocaleString('en-IN')}</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-r from-green-500 to-emerald-600 text-white">
-                    <CardContent className="p-4 text-center">
-                      <h4 className="text-sm font-medium mb-1">Final Amount</h4>
-                      <p className="text-2xl font-bold">₹{finalAmount.toLocaleString('en-IN')}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {goldWeight && (
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <h4 className="font-semibold text-amber-800 mb-2">Value Breakdown:</h4>
-                    <div className="text-sm text-amber-700 space-y-1">
-                      <div className="flex justify-between">
-                        <span>{goldWeight}g × ₹{goldRates[goldPurity as keyof typeof goldRates]}/g</span>
-                        <span>₹{estimatedValue.toLocaleString('en-IN')}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Making charges (15%)</span>
-                        <span>- ₹{Math.round(estimatedValue * makingChargeDeduction).toLocaleString('en-IN')}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Wastage (5%)</span>
-                        <span>- ₹{Math.round(estimatedValue * wastageDeduction).toLocaleString('en-IN')}</span>
-                      </div>
-                      <div className="border-t border-amber-300 pt-2 flex justify-between font-bold">
-                        <span>Final Amount</span>
-                        <span>₹{finalAmount.toLocaleString('en-IN')}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Selling Process */}
-            <Card className="bg-white shadow-xl border border-yellow-200">
+            {/* Sell Gold Form */}
+            <Card className="shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-amber-700">
-                  How to Sell Your Gold
+                <CardTitle className="flex items-center gap-2">
+                  <DollarSign className="h-6 w-6 text-amber-600" />
+                  Sell Gold Form
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
-                      <div>
-                        <h4 className="font-bold text-gray-800">Schedule Appointment</h4>
-                        <p className="text-gray-600 text-sm">Book a free home visit or visit our store</p>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Customer Details */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium text-gray-900">Customer Information</h4>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="customerName">Full Name *</Label>
+                        <Input
+                          id="customerName"
+                          placeholder="Enter your full name"
+                          value={formData.customerName}
+                          onChange={(e) => handleInputChange('customerName', e.target.value)}
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="customerPhone">Phone Number *</Label>
+                        <Input
+                          id="customerPhone"
+                          type="tel"
+                          placeholder="Enter your phone number"
+                          value={formData.customerPhone}
+                          onChange={(e) => handleInputChange('customerPhone', e.target.value)}
+                          required
+                        />
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
-                      <div>
-                        <h4 className="font-bold text-gray-800">Gold Testing</h4>
-                        <p className="text-gray-600 text-sm">We test purity using advanced equipment</p>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="customerEmail">Email (Optional)</Label>
+                      <Input
+                        id="customerEmail"
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={formData.customerEmail}
+                        onChange={(e) => handleInputChange('customerEmail', e.target.value)}
+                      />
                     </div>
 
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                      <div>
-                        <h4 className="font-bold text-gray-800">Price Quote</h4>
-                        <p className="text-gray-600 text-sm">Get best market rate quote instantly</p>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="customerAddress">Address</Label>
+                      <Textarea
+                        id="customerAddress"
+                        placeholder="Enter your address"
+                        value={formData.customerAddress}
+                        onChange={(e) => handleInputChange('customerAddress', e.target.value)}
+                        rows={3}
+                      />
                     </div>
                   </div>
 
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">4</div>
-                      <div>
-                        <h4 className="font-bold text-gray-800">Documentation</h4>
-                        <p className="text-gray-600 text-sm">Complete simple paperwork</p>
+                  {/* Gold Details */}
+                  <div className="space-y-4">
+                    <h4 className="font-medium text-gray-900">Gold Information</h4>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="goldType">Gold Type *</Label>
+                        <Select value={formData.goldType} onValueChange={(value) => handleInputChange('goldType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select gold type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="24k">24K Gold (99.9%)</SelectItem>
+                            <SelectItem value="22k">22K Gold (91.7%)</SelectItem>
+                            <SelectItem value="18k">18K Gold (75.0%)</SelectItem>
+                            <SelectItem value="14k">14K Gold (58.3%)</SelectItem>
+                            <SelectItem value="10k">10K Gold (41.7%)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="weight">Weight (grams) *</Label>
+                        <Input
+                          id="weight"
+                          type="number"
+                          step="0.01"
+                          placeholder="Enter weight"
+                          value={formData.weight}
+                          onChange={(e) => handleInputChange('weight', e.target.value)}
+                          required
+                        />
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">5</div>
-                      <div>
-                        <h4 className="font-bold text-gray-800">Instant Payment</h4>
-                        <p className="text-gray-600 text-sm">Receive cash or bank transfer immediately</p>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="currentPrice">Current Gold Price (₹/gram) *</Label>
+                      <Input
+                        id="currentPrice"
+                        type="number"
+                        placeholder="Enter current gold price"
+                        value={formData.currentPrice}
+                        onChange={(e) => handleInputChange('currentPrice', e.target.value)}
+                        required
+                      />
                     </div>
 
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center">✓</div>
-                      <div>
-                        <h4 className="font-bold text-green-700">Transaction Complete</h4>
-                        <p className="text-gray-600 text-sm">Get receipt and enjoy your cash!</p>
+                    {estimatedValue > 0 && (
+                      <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h4 className="font-semibold text-green-800 mb-2">Estimated Value:</h4>
+                        <p className="text-2xl font-bold text-green-700">₹{estimatedValue.toLocaleString()}</p>
+                        <p className="text-sm text-green-600 mt-1">After deductions (making charges & wastage)</p>
                       </div>
-                    </div>
+                    )}
                   </div>
-                </div>
+
+                  <div className="flex gap-4">
+                    <Button 
+                      type="submit" 
+                      className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white" 
+                      disabled={loading}
+                    >
+                      {loading ? 'Submitting...' : 'Submit for Selling'}
+                    </Button>
+                    <Button type="button" variant="outline" onClick={resetForm}>
+                      Reset
+                    </Button>
+                  </div>
+                </form>
               </CardContent>
             </Card>
 
-            {/* Action Buttons */}
+            {/* Results */}
+            {result && (
+              <Card className="shadow-lg border-green-200">
+                <CardHeader className="bg-green-50">
+                  <CardTitle className="flex items-center gap-2 text-green-800">
+                    <CheckCircle className="h-6 w-6" />
+                    Gold Selling Request Submitted
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Transaction ID:</span>
+                      <span className="font-medium">{result.transactionId}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Customer:</span>
+                      <span className="font-medium">{result.customerName}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Gold Type:</span>
+                      <span className="font-medium">{result.goldType}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Weight:</span>
+                      <span className="font-medium">{result.weight}g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Selling Price:</span>
+                      <span className="font-medium text-green-600">₹{result.sellingPrice.toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  <Alert>
+                    <CheckCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      Your gold selling request has been submitted successfully. Our team will contact you within 24 hours to schedule the evaluation.
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Why Choose Us */}
             <div className="grid md:grid-cols-2 gap-6">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-4 rounded-lg transform transition-all duration-300 hover:scale-105 text-lg"
-              >
-                <Camera className="mr-2 h-5 w-5" />
-                Schedule Home Visit
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-4 rounded-lg transition-all duration-300 text-lg"
-              >
-                <ArrowRight className="mr-2 h-5 w-5" />
-                Visit Our Store
-              </Button>
-            </div>
-          </div>
-        </div>
+              <Card className="bg-white shadow-lg border border-yellow-200 text-center">
+                <CardContent className="p-6">
+                  <TrendingUp className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+                  <h3 className="font-bold text-lg mb-2">Best Prices</h3>
+                  <p className="text-gray-600 text-sm">Market-leading rates updated every 5 minutes</p>
+                </CardContent>
+              </Card>
 
-        {/* Why Choose Us */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold text-center text-amber-700 mb-12">
-            Why Sell Gold to Viraj Jewellers?
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            <Card className="bg-white shadow-lg border border-yellow-200 text-center">
-              <CardContent className="p-6">
-                <TrendingUp className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                <h3 className="font-bold text-lg mb-2">Best Prices</h3>
-                <p className="text-gray-600 text-sm">Market-leading rates updated every 5 minutes</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-lg border border-yellow-200 text-center">
-              <CardContent className="p-6">
-                <Shield className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                <h3 className="font-bold text-lg mb-2">100% Safe</h3>
-                <p className="text-gray-600 text-sm">Secure transactions with proper documentation</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-lg border border-yellow-200 text-center">
-              <CardContent className="p-6">
-                <Clock className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                <h3 className="font-bold text-lg mb-2">Instant Payment</h3>
-                <p className="text-gray-600 text-sm">Get cash or bank transfer immediately</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-lg border border-yellow-200 text-center">
-              <CardContent className="p-6">
-                <Award className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                <h3 className="font-bold text-lg mb-2">Trusted Since 1985</h3>
-                <p className="text-gray-600 text-sm">40+ years of experience and trust</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Documents Required */}
-        <div className="mt-12 bg-amber-50 border border-amber-200 rounded-lg p-8">
-          <h3 className="font-bold text-xl text-amber-800 mb-4">Documents Required:</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-semibold text-amber-700 mb-2">For Indian Citizens:</h4>
-              <ul className="text-sm text-amber-600 space-y-1">
-                <li>• Aadhaar Card (mandatory)</li>
-                <li>• PAN Card</li>
-                <li>• Bank Account Details</li>
-                <li>• Purchase receipts (if available)</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-amber-700 mb-2">For NRIs:</h4>
-              <ul className="text-sm text-amber-600 space-y-1">
-                <li>• Passport</li>
-                <li>• Overseas Citizen of India (OCI) card</li>
-                <li>• NRE/NRO Bank Account Details</li>
-                <li>• Address proof in India</li>
-              </ul>
+              <Card className="bg-white shadow-lg border border-yellow-200 text-center">
+                <CardContent className="p-6">
+                  <Shield className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+                  <h3 className="font-bold text-lg mb-2">100% Safe</h3>
+                  <p className="text-gray-600 text-sm">Secure transactions with proper documentation</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

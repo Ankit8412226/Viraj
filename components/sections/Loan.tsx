@@ -1,258 +1,383 @@
 'use client';
 
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowRight, Calculator, Info, RefreshCw, TrendingUp } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowRight, Calculator, CheckCircle, Info, RefreshCw, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+
+interface LoanResult {
+  transactionId: string;
+  customerName: string;
+  customerPhone: string;
+  goldWeight: number;
+  goldPurity: number;
+  loanAmount: number;
+  emi: number;
+  totalAmount: number;
+  ltvRatio: number;
+  status: string;
+}
 
 export default function LoanCalculatorPage() {
-  const [goldWeight, setGoldWeight] = useState('');
-  const [goldPurity, setGoldPurity] = useState('22');
-  const [loanAmount, setLoanAmount] = useState(0);
+  const [formData, setFormData] = useState({
+    customerName: '',
+    customerPhone: '',
+    customerEmail: '',
+    goldWeight: '',
+    goldPurity: '22',
+    currentGoldPrice: '6500',
+    loanAmount: '',
+    interestRate: '12',
+    tenureMonths: '12'
+  });
+  const [result, setResult] = useState<LoanResult | null>(null);
+  const [loading, setLoading] = useState(false);
   const [goldValue, setGoldValue] = useState(0);
-  const [monthlyEMI, setMonthlyEMI] = useState(0);
-  const [loanTenure, setLoanTenure] = useState('12');
+  const [maxLoanAmount, setMaxLoanAmount] = useState(0);
 
-  // Current rates
+  // Gold rates
   const goldRates = {
-    '24': 6200,
-    '22': 5800,
+    '24': 6500,
+    '22': 6200,
     '18': 4650
   };
 
-  const interestRate = 12; // 12% per annum
-  const loanPercentage = 0.85; // 85% of gold value
-
-  const calculateLoan = () => {
-    if (goldWeight) {
-      const weight = parseFloat(goldWeight);
-      const ratePerGram = goldRates[goldPurity as keyof typeof goldRates];
-      const totalGoldValue = weight * ratePerGram;
-      const maxLoan = totalGoldValue * loanPercentage;
-
+  const calculateValues = () => {
+    if (formData.goldWeight && formData.goldPurity && formData.currentGoldPrice) {
+      const weight = parseFloat(formData.goldWeight);
+      const purity = parseFloat(formData.goldPurity);
+      const price = parseFloat(formData.currentGoldPrice);
+      
+      const totalGoldValue = weight * (purity / 100) * price;
+      const maxLoan = totalGoldValue * 0.85; // 85% of gold value
+      
       setGoldValue(Math.round(totalGoldValue));
-      setLoanAmount(Math.round(maxLoan));
-
-      // Calculate EMI
-      const principal = maxLoan;
-      const monthlyRate = interestRate / 100 / 12;
-      const tenure = parseInt(loanTenure);
-      const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
-                  (Math.pow(1 + monthlyRate, tenure) - 1);
-      setMonthlyEMI(Math.round(emi));
+      setMaxLoanAmount(Math.round(maxLoan));
+      
+      if (!formData.loanAmount) {
+        setFormData(prev => ({ ...prev, loanAmount: Math.round(maxLoan).toString() }));
+      }
     }
   };
 
   useEffect(() => {
-    calculateLoan();
-  }, [goldWeight, goldPurity, loanTenure]);
+    calculateValues();
+  }, [formData.goldWeight, formData.goldPurity, formData.currentGoldPrice]);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/loan-calculator', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          goldWeight: parseFloat(formData.goldWeight),
+          goldPurity: parseFloat(formData.goldPurity),
+          currentGoldPrice: parseFloat(formData.currentGoldPrice),
+          loanAmount: parseFloat(formData.loanAmount),
+          interestRate: parseFloat(formData.interestRate),
+          tenureMonths: parseInt(formData.tenureMonths)
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult(data.data);
+        toast.success('Loan calculation completed successfully!');
+      } else {
+        toast.error(data.error || 'Failed to calculate loan');
+      }
+    } catch (error: any) {
+      toast.error('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      customerName: '',
+      customerPhone: '',
+      customerEmail: '',
+      goldWeight: '',
+      goldPurity: '22',
+      currentGoldPrice: '6500',
+      loanAmount: '',
+      interestRate: '12',
+      tenureMonths: '12'
+    });
+    setResult(null);
+    setGoldValue(0);
+    setMaxLoanAmount(0);
+  };
 
   return (
-    <div id='loan-calculator' className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <Calculator className="h-16 w-16 mx-auto mb-6 text-yellow-100" />
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+    <div id='loan-calculator' className="py-16 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <Calculator className="h-16 w-16 mx-auto mb-6 text-yellow-500" />
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Gold Loan Calculator
-          </h1>
-          <p className="text-xl text-yellow-100 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Calculate your loan amount, EMI, and get instant approval for gold loans
           </p>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Calculator Section */}
-          <div>
-            <Card className="bg-white shadow-xl border border-yellow-200">
-              <CardHeader className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white">
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <Calculator className="h-6 w-6 mr-3" />
-                  Calculate Your Loan
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-8 space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Gold Weight (in grams)
-                  </label>
-                  <Input
-                    type="number"
-                    placeholder="Enter weight in grams"
-                    value={goldWeight}
-                    onChange={(e) => setGoldWeight(e.target.value)}
-                    className="text-lg border-2 border-yellow-200 focus:border-yellow-500 focus:ring-yellow-500"
-                  />
+          {/* Calculator Form */}
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calculator className="h-6 w-6 text-amber-600" />
+                Loan Calculator
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Customer Details */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Customer Information</h4>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="customerName">Full Name *</Label>
+                    <Input
+                      id="customerName"
+                      placeholder="Enter your full name"
+                      value={formData.customerName}
+                      onChange={(e) => handleInputChange('customerName', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="customerPhone">Phone Number *</Label>
+                    <Input
+                      id="customerPhone"
+                      type="tel"
+                      placeholder="Enter your phone number"
+                      value={formData.customerPhone}
+                      onChange={(e) => handleInputChange('customerPhone', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="customerEmail">Email (Optional)</Label>
+                    <Input
+                      id="customerEmail"
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={formData.customerEmail}
+                      onChange={(e) => handleInputChange('customerEmail', e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Gold Purity
-                  </label>
-                  <select
-                    value={goldPurity}
-                    onChange={(e) => setGoldPurity(e.target.value)}
-                    className="w-full p-3 text-lg border-2 border-yellow-200 rounded-md focus:border-yellow-500 focus:ring-yellow-500 bg-white"
+                {/* Gold Details */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Gold Information</h4>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="goldWeight">Weight (grams) *</Label>
+                      <Input
+                        id="goldWeight"
+                        type="number"
+                        step="0.01"
+                        placeholder="Enter weight"
+                        value={formData.goldWeight}
+                        onChange={(e) => handleInputChange('goldWeight', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="goldPurity">Purity (%) *</Label>
+                      <Select value={formData.goldPurity} onValueChange={(value) => handleInputChange('goldPurity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select purity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="75">18K Gold (75%)</SelectItem>
+                          <SelectItem value="91.7">22K Gold (91.7%)</SelectItem>
+                          <SelectItem value="99.9">24K Gold (99.9%)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="currentGoldPrice">Current Gold Price (₹/gram) *</Label>
+                    <Input
+                      id="currentGoldPrice"
+                      type="number"
+                      placeholder="Enter current gold price"
+                      value={formData.currentGoldPrice}
+                      onChange={(e) => handleInputChange('currentGoldPrice', e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="loanAmount">Loan Amount (₹) *</Label>
+                      <Input
+                        id="loanAmount"
+                        type="number"
+                        placeholder="Enter loan amount"
+                        value={formData.loanAmount}
+                        onChange={(e) => handleInputChange('loanAmount', e.target.value)}
+                        required
+                      />
+                      {maxLoanAmount > 0 && (
+                        <p className="text-sm text-gray-500">
+                          Max: ₹{maxLoanAmount.toLocaleString()}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="tenureMonths">Tenure (Months) *</Label>
+                      <Select value={formData.tenureMonths} onValueChange={(value) => handleInputChange('tenureMonths', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select tenure" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="6">6 Months</SelectItem>
+                          <SelectItem value="12">12 Months</SelectItem>
+                          <SelectItem value="18">18 Months</SelectItem>
+                          <SelectItem value="24">24 Months</SelectItem>
+                          <SelectItem value="36">36 Months</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <Button 
+                    type="submit" 
+                    className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white" 
+                    disabled={loading}
                   >
-                    <option value="18">18K Gold (₹{goldRates['18']}/g)</option>
-                    <option value="22">22K Gold (₹{goldRates['22']}/g)</option>
-                    <option value="24">24K Gold (₹{goldRates['24']}/g)</option>
-                  </select>
+                    {loading ? 'Calculating...' : 'Calculate Loan'}
+                  </Button>
+                  <Button type="button" variant="outline" onClick={resetForm}>
+                    Reset
+                  </Button>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Loan Tenure (months)
-                  </label>
-                  <select
-                    value={loanTenure}
-                    onChange={(e) => setLoanTenure(e.target.value)}
-                    className="w-full p-3 text-lg border-2 border-yellow-200 rounded-md focus:border-yellow-500 focus:ring-yellow-500 bg-white"
-                  >
-                    <option value="6">6 Months</option>
-                    <option value="12">12 Months</option>
-                    <option value="18">18 Months</option>
-                    <option value="24">24 Months</option>
-                    <option value="36">36 Months</option>
-                  </select>
-                </div>
-
-                <Button
-                  onClick={calculateLoan}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-3 rounded-lg transform transition-all duration-300 hover:scale-105"
-                >
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Recalculate
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+              </form>
+            </CardContent>
+          </Card>
 
           {/* Results Section */}
           <div className="space-y-6">
-            {/* Gold Value */}
-            <Card className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-xl">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Total Gold Value</h3>
-                <p className="text-3xl font-bold">₹{goldValue.toLocaleString('en-IN')}</p>
-                {goldWeight && (
+            {/* Gold Value Display */}
+            {goldValue > 0 && (
+              <Card className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-xl">
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-lg font-semibold mb-2">Total Gold Value</h3>
+                  <p className="text-3xl font-bold">₹{goldValue.toLocaleString('en-IN')}</p>
                   <p className="text-yellow-100 text-sm mt-2">
-                    {goldWeight}g of {goldPurity}K gold @ ₹{goldRates[goldPurity as keyof typeof goldRates]}/g
+                    Max Loan: ₹{maxLoanAmount.toLocaleString('en-IN')} (85% of gold value)
                   </p>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            )}
 
-            {/* Loan Amount */}
-            <Card className="bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-xl">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Maximum Loan Amount</h3>
-                <p className="text-3xl font-bold">₹{loanAmount.toLocaleString('en-IN')}</p>
-                <p className="text-green-100 text-sm mt-2">
-                  Up to 85% of gold value
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* EMI Calculation */}
-            <Card className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-xl">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Monthly EMI</h3>
-                <p className="text-3xl font-bold">₹{monthlyEMI.toLocaleString('en-IN')}</p>
-                <p className="text-blue-100 text-sm mt-2">
-                  @ {interestRate}% per annum for {loanTenure} months
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Loan Details */}
-            <Card className="bg-white shadow-xl border border-yellow-200">
-              <CardHeader>
-                <CardTitle className="text-amber-700 flex items-center">
-                  <Info className="h-5 w-5 mr-2" />
-                  Loan Summary
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Processing Fee</span>
-                  <span className="font-semibold">1% + GST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Interest Rate</span>
-                  <span className="font-semibold">{interestRate}% per annum</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Loan-to-Value</span>
-                  <span className="font-semibold">Up to 85%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Approval Time</span>
-                  <span className="font-semibold">15 minutes</span>
-                </div>
-                <div className="border-t pt-4">
-                  <div className="flex justify-between text-lg font-bold">
-                    <span>Total Payable</span>
-                    <span className="text-amber-700">
-                      ₹{(monthlyEMI * parseInt(loanTenure)).toLocaleString('en-IN')}
-                    </span>
+            {result && (
+              <Card className="shadow-lg border-green-200">
+                <CardHeader className="bg-green-50">
+                  <CardTitle className="flex items-center gap-2 text-green-800">
+                    <CheckCircle className="h-6 w-6" />
+                    Loan Calculation Results
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-blue-50 rounded-lg">
+                      <p className="text-sm text-blue-600">Monthly EMI</p>
+                      <p className="text-xl font-bold text-blue-800">
+                        ₹{result.emi.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="text-center p-3 bg-green-50 rounded-lg">
+                      <p className="text-sm text-green-600">Total Amount</p>
+                      <p className="text-xl font-bold text-green-800">
+                        ₹{result.totalAmount.toLocaleString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
 
-            {/* Action Buttons */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Customer:</span>
+                      <span className="font-medium">{result.customerName}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Phone:</span>
+                      <span className="font-medium">{result.customerPhone}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Gold Weight:</span>
+                      <span className="font-medium">{result.goldWeight}g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">LTV Ratio:</span>
+                      <span className="font-medium">{result.ltvRatio}%</span>
+                    </div>
+                  </div>
+
+                  <Alert>
+                    <Info className="h-4 w-4" />
+                    <AlertDescription>
+                      Your loan application has been processed and saved. Our team will contact you within 24 hours.
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Information Cards */}
             <div className="space-y-4">
-              <Button
-                className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-4 rounded-lg transform transition-all duration-300 hover:scale-105 text-lg"
-              >
-                Apply for This Loan
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-3 rounded-lg transition-all duration-300"
-              >
-                Schedule Doorstep Service
-              </Button>
+              <Card className="bg-white shadow-lg border border-yellow-200">
+                <CardContent className="p-6 text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <TrendingUp className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 text-amber-700">Best Rates</h3>
+                  <p className="text-gray-600">We offer the most competitive interest rates starting from 12% per annum.</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white shadow-lg border border-yellow-200">
+                <CardContent className="p-6 text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Calculator className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2 text-amber-700">Flexible Tenure</h3>
+                  <p className="text-gray-600">Choose from 6 to 36 months loan tenure as per your convenience.</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </div>
-
-        {/* Information Cards */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
-          <Card className="bg-white shadow-lg border border-yellow-200">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-amber-700">Best Rates</h3>
-              <p className="text-gray-600">We offer the most competitive interest rates in the market starting from 12% per annum.</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-lg border border-yellow-200">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calculator className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-amber-700">Flexible Tenure</h3>
-              <p className="text-gray-600">Choose from 6 to 36 months loan tenure as per your convenience and repayment capacity.</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-lg border border-yellow-200">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ArrowRight className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-amber-700">Quick Process</h3>
-              <p className="text-gray-600">Get your loan approved and disbursed within 15 minutes of gold verification.</p>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Disclaimer */}

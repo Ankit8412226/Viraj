@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { scrollToSection } from '@/lib/utils';
 import { Calculator, Clock, Coins, DollarSign, Gem, Home, Shield, TrendingUp } from 'lucide-react';
 
 export default function Services() {
@@ -11,7 +12,8 @@ export default function Services() {
       title: "Gold Loans",
       description: "Get instant cash against your gold jewelry and ornaments with competitive interest rates and flexible repayment options.",
       features: ["Up to 85% of gold value", "Lowest interest rates", "No hidden charges"],
-      color: "from-yellow-500 to-amber-600"
+      color: "from-yellow-500 to-amber-600",
+      action: () => scrollToSection("loan-calculator")
     },
     {
       icon: <div className="h-12 w-12 rounded-full bg-gradient-to-br from-gray-400 to-slate-500 flex items-center justify-center">
@@ -20,14 +22,16 @@ export default function Services() {
       title: "Silver Loans",
       description: "Quick cash loans against your silver jewelry, coins, and artifacts with transparent pricing and fast approval.",
       features: ["Quick 15-min approval", "Fair market rates", "Safe storage"],
-      color: "from-gray-400 to-slate-600"
+      color: "from-gray-400 to-slate-600",
+      action: () => scrollToSection("contact")
     },
     {
       icon: <Gem className="h-12 w-12 text-amber-600" />,
       title: "Diamond Loans",
       description: "Premium loans against certified diamonds and diamond jewelry with expert valuation and secure handling.",
       features: ["Expert valuation", "Premium rates", "Certified process"],
-      color: "from-amber-500 to-yellow-600"
+      color: "from-amber-500 to-yellow-600",
+      action: () => scrollToSection("contact")
     }
   ];
 
@@ -35,17 +39,20 @@ export default function Services() {
     {
       icon: <Home className="h-8 w-8 text-amber-600" />,
       title: "Doorstep Service",
-      description: "We come to your home for jewelry evaluation and loan processing for your convenience and security."
+      description: "We come to your home for jewelry evaluation and loan processing for your convenience and security.",
+      action: () => scrollToSection("doorstep-service")
     },
     {
       icon: <Clock className="h-8 w-8 text-amber-600" />,
       title: "Quick Processing",
-      description: "Get your loan approved and cash in hand within 15 minutes of jewelry verification."
+      description: "Get your loan approved and cash in hand within 15 minutes of jewelry verification.",
+      action: () => scrollToSection("loan-calculator")
     },
     {
       icon: <Shield className="h-8 w-8 text-amber-600" />,
       title: "Secure Storage",
-      description: "Your precious jewelry is stored in our high-security vaults with full insurance coverage."
+      description: "Your precious jewelry is stored in our high-security vaults with full insurance coverage.",
+      action: () => scrollToSection("about")
     }
   ];
 
@@ -69,7 +76,8 @@ export default function Services() {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white border-2 border-yellow-200 hover:border-yellow-400 overflow-hidden"
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white border-2 border-yellow-200 hover:border-yellow-400 overflow-hidden cursor-pointer"
+              onClick={service.action}
             >
               <CardContent className="p-8 text-center">
                 <div className="mb-6 flex justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -94,15 +102,6 @@ export default function Services() {
                 </div>
 
                 <Button
-                  onClick={() => {
-                    if (service.title === "Gold Loans") {
-                      document.getElementById('loan-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else if (service.title === "Silver Loans") {
-                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else if (service.title === "Diamond Loans") {
-                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                  }}
                   className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg transform transition-all duration-300 hover:scale-105 text-white font-semibold rounded-full`}
                 >
                   Learn More
@@ -122,7 +121,8 @@ export default function Services() {
             {additionalServices.map((service, index) => (
               <div
                 key={service.title}
-                className="text-center group hover:transform hover:scale-105 transition-all duration-300"
+                className="text-center group hover:transform hover:scale-105 transition-all duration-300 cursor-pointer"
+                onClick={service.action}
               >
                 <div className="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300 border border-yellow-200">
                   {service.icon}
@@ -149,7 +149,7 @@ export default function Services() {
           </div>
           <Button
             size="lg"
-            onClick={() => document.getElementById('loan-calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            onClick={() => scrollToSection('loan-calculator')}
             className="bg-white text-amber-700 hover:bg-yellow-50 font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105"
           >
             <Calculator className="mr-2 h-5 w-5" />

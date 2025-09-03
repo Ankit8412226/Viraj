@@ -15,9 +15,9 @@ export default function Hero({ scrollY }: HeroProps) {
 
   // Jewelry images for sliding background
   const jewelryImages = [
-    "/images/gold.jpeg",
-    "/images/pandal.jpeg",
-    // "/images/cash.jpg",
+    "https://images.pexels.com/photos/1232931/pexels-photo-1232931.jpeg",
+    "https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg",
+    "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg",
   ];
 
   // Auto-slide effect
@@ -28,7 +28,7 @@ export default function Hero({ scrollY }: HeroProps) {
     return () => clearInterval(timer);
   }, [jewelryImages.length]);
 
-  // Real-time market rates based on current data from September 2, 2025
+  // Real-time market rates
   const marketRates = [
     { metal: "Gold (24K)", rate: "₹10,609", change: "+0.68%", trend: "up" },
     { metal: "Gold (22K)", rate: "₹9,725", change: "+0.68%", trend: "up" },
@@ -41,13 +41,13 @@ export default function Hero({ scrollY }: HeroProps) {
       id="home"
       className="relative min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 overflow-hidden"
     >
-      {/* Sliding Background Images - Made More Visible */}
+      {/* Sliding Background Images */}
       <div className="absolute inset-0">
         {jewelryImages.map((image, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-70" : "opacity-0"
+              index === currentSlide ? "opacity-60" : "opacity-0"
             }`}
           >
             <img
@@ -57,14 +57,13 @@ export default function Hero({ scrollY }: HeroProps) {
             />
           </div>
         ))}
-        {/* Lighter Golden Overlay - Reduced opacity for better image visibility */}
+        {/* Golden Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-900/40 via-yellow-800/30 to-orange-900/40"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent"></div>
-        {/* Additional subtle overlay for text readability */}
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
-      {/* Enhanced Floating Golden Particles */}
+      {/* Floating Golden Particles */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-yellow-400 rounded-full animate-pulse shadow-lg"></div>
         <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-amber-300 rounded-full animate-ping shadow-lg"></div>
@@ -120,11 +119,11 @@ export default function Hero({ scrollY }: HeroProps) {
               </div>
             </div>
 
-            {/* CTA Buttons with Smooth Scrolling (hidden on mobile) */}
-            <div className="hidden md:flex flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-500">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-500">
               <Button
                 size="lg"
-                onClick={() => scrollToSection("#loan-calculator")}
+                onClick={() => scrollToSection("loan-calculator")}
                 className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
               >
                 Calculate Loan Amount
@@ -132,7 +131,7 @@ export default function Hero({ scrollY }: HeroProps) {
               </Button>
               <Button
                 size="lg"
-                onClick={() => scrollToSection("#sell-gold")}
+                onClick={() => scrollToSection("sell-gold")}
                 className="bg-white/30 backdrop-blur-md border-2 border-yellow-300 text-yellow-100 hover:bg-yellow-400 hover:text-amber-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 cursor-pointer shadow-lg"
               >
                 Sell Old Gold
@@ -140,52 +139,28 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Additional Action Buttons */}
-            <div className="hidden md:flex flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-700">
+            <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-700">
               <Button
                 size="lg"
-                onClick={() => scrollToSection("#doorstep-service")}
-                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
+                onClick={() => scrollToSection("doorstep-service")}
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl cursor-pointer"
               >
                 Schedule Home Visit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
                 size="lg"
-                onClick={() => scrollToSection("#gold-check")}
-                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
+                onClick={() => scrollToSection("gold-check")}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl cursor-pointer"
               >
                 Check Gold Value
-              </Button>
-            </div>
-
-            {/* Learn More Button */}
-            <div className="hidden md:flex justify-center animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-1000">
-              <Button
-                size="lg"
-                onClick={() => scrollToSection("#services")}
-                className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-300/50 cursor-pointer"
-              >
-                Learn More About Our Services
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-
-            {/* Visit Office Button */}
-            <div className="hidden md:flex justify-center animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-1000">
-              <Button
-                size="lg"
-                onClick={() => window.open('https://maps.google.com/?q=Viraj+Jewellers+Lajpat+Nagar', '_blank')}
-                className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-orange-400/50 cursor-pointer"
-              >
-                Visit Our Office
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
 
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
               <div
-                onClick={() => scrollToSection("#loan-calculator")}
+                onClick={() => scrollToSection("loan-calculator")}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
@@ -196,7 +171,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 </p>
               </div>
               <div
-                onClick={() => scrollToSection("#services")}
+                onClick={() => scrollToSection("services")}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-gray-200 to-gray-400 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
@@ -207,7 +182,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 </p>
               </div>
               <div
-                onClick={() => scrollToSection("#services")}
+                onClick={() => scrollToSection("services")}
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
               >
                 <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
@@ -266,14 +241,14 @@ export default function Hero({ scrollY }: HeroProps) {
 
                 <div className="pt-4 space-y-3">
                   <Button
-                    onClick={() => scrollToSection("#loan-calculator")}
+                    onClick={() => scrollToSection("loan-calculator")}
                     className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-3 rounded-lg transform transition-all duration-300 hover:scale-105 cursor-pointer"
                   >
                     Get Loan Quote
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => scrollToSection("#sell-gold")}
+                    onClick={() => scrollToSection("sell-gold")}
                     className="w-full border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-3 rounded-lg transition-all duration-300 cursor-pointer"
                   >
                     Sell Your Jewelry
@@ -302,7 +277,7 @@ export default function Hero({ scrollY }: HeroProps) {
         {/* Features Banner */}
         <div className="mt-20 grid md:grid-cols-4 gap-6">
           <div
-            onClick={() => scrollToSection("#loan-calculator")}
+            onClick={() => scrollToSection("loan-calculator")}
             className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
           >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
@@ -317,7 +292,7 @@ export default function Hero({ scrollY }: HeroProps) {
           </div>
 
           <div
-            onClick={() => scrollToSection("#sell-gold")}
+            onClick={() => scrollToSection("sell-gold")}
             className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
           >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
@@ -332,7 +307,7 @@ export default function Hero({ scrollY }: HeroProps) {
           </div>
 
           <div
-            onClick={() => scrollToSection("#gold-check")}
+            onClick={() => scrollToSection("gold-check")}
             className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
           >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
@@ -347,7 +322,7 @@ export default function Hero({ scrollY }: HeroProps) {
           </div>
 
           <div
-            onClick={() => scrollToSection("#doorstep-service")}
+            onClick={() => scrollToSection("doorstep-service")}
             className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
           >
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">

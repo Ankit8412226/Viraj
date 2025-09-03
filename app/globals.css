@@ -167,6 +167,21 @@
   animation: float 3s ease-in-out infinite;
 }
 
+@keyframes loadingbar {
+  0% { 
+    transform: translateX(-100%); 
+    width: 0%; 
+  }
+  50% { 
+    transform: translateX(0%); 
+    width: 100%; 
+  }
+  100% { 
+    transform: translateX(100%); 
+    width: 0%; 
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -207,4 +222,56 @@ select:focus-visible {
 
 .bg-blue-radial {
   background: radial-gradient(circle at center, #3b82f6 0%, #1e40af 100%);
+}
+
+/* Loading animation */
+.animate-loading-bar {
+  animation: loadingbar 2s ease infinite;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Button hover effects */
+.btn-hover-effect {
+  transition: all 0.3s ease;
+}
+
+.btn-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effects */
+.card-hover-effect {
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text animation */
+.gradient-text-animate {
+  background: linear-gradient(-45deg, #f59e0b, #d97706, #92400e, #f59e0b);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
