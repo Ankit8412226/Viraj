@@ -6,7 +6,7 @@ export default function Loading() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 1000); // 3 sec
+    const timer = setTimeout(() => setShow(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -19,7 +19,11 @@ export default function Loading() {
         <div className="relative">
           <div className="w-23 h-23 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center shadow-2xl animate-pulse">
             <span className="text-white font-bold text-4xl font-playfair">
-              <img className="rounded-full w-[90px] h-[90px]" src="images/virajLogo.jpg" alt="Viraj Logo" />
+              <img
+                className="rounded-full w-[90px] h-[90px]"
+                src="images/virajLogo.jpg"
+                alt="Viraj Logo"
+              />
             </span>
           </div>
           <div className="absolute inset-0 w-24 h-24 border-4 border-transparent border-t-yellow-400 rounded-full animate-spin"></div>

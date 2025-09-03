@@ -30,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     (window as any).scrollToSection = scrollToSection;
-    const timer = setTimeout(() => setIsLoaded(true), 1000); // wait same as loading
+    const timer = setTimeout(() => setIsLoaded(true), 2000); 
     return () => clearTimeout(timer);
   }, []);
 

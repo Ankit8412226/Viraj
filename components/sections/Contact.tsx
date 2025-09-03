@@ -26,7 +26,7 @@ export default function Contact() {
     {
       icon: <Phone className="h-6 w-6 text-amber-600" />,
       title: "Phone",
-      details: ["+91-9350564449", "+91-9350564449"],
+      details: ["+91-9810100561", "+91-9810100561"],
       action: "Call Now"
     },
     {

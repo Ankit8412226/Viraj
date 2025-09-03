@@ -19,7 +19,7 @@ export default function Header() {
 
   // Close mobile menu after clicking and smooth scroll
   const handleSectionClick = (sectionId: string) => {
-    const id = sectionId.startsWith('#') ? sectionId.slice(1) : sectionId;
+    const id = sectionId.startsWith("#") ? sectionId.slice(1) : sectionId;
     scrollToSection(id);
     setIsMenuOpen(false);
   };
@@ -54,7 +54,9 @@ export default function Header() {
             </div>
           </div>
           <div className="hidden md:block">
-            <span className="animate-pulse">🔥 Best Gold Prices Today: ₹10,609/gram</span>
+            <span className="animate-pulse">
+              🔥 Best Gold Prices Today: ₹10,609/gram
+            </span>
           </div>
         </div>
       </div>
@@ -63,15 +65,20 @@ export default function Header() {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div 
+          <div
             className="flex items-center space-x-3 cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
-            <div className="w-20 h-20 bg-gradient-to-br overflow-hidden rounded-full from-yellow-500 to-amber-600 flex items-center justify-center">
-              <span className="text-white overflow-hidden font-bold text-lg">
-                <img className="rounded-full w-[90px] h-[90px]" src="images/virajLogo.jpg" alt="Viraj Image" />
-              </span>
+            <div className="relative group w-28 h-28 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-700 p-[3px] shadow-2xl hover:shadow-gold transition-all duration-500">
+              <div className="w-full h-full rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/imageViraj.jpg"
+                  alt="Viraj Logo"
+                  className="w-full h-full rounded-full object-cover border-2 border-white shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 ease-in-out"
+                />
+              </div>
             </div>
+
             <div>
               <h1
                 className={`text-2xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent ${
