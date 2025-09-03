@@ -46,7 +46,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4" />
-              <span>+91-9350564449</span>
+              <span>+91-9810100561</span>
             </div>
             <div className="hidden md:flex items-center space-x-2">
               <MapPin className="h-4 w-4" />
@@ -67,8 +67,10 @@ export default function Header() {
             className="flex items-center space-x-3 cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">V</span>
+            <div className="w-20 h-20 bg-gradient-to-br overflow-hidden rounded-full from-yellow-500 to-amber-600 flex items-center justify-center">
+              <span className="text-white overflow-hidden font-bold text-lg">
+                <img className="rounded-full w-[90px] h-[90px]" src="images/virajLogo.jpg" alt="Viraj Image" />
+              </span>
             </div>
             <div>
               <h1

@@ -17,7 +17,8 @@ export default function Hero({ scrollY }: HeroProps) {
   const jewelryImages = [
     "https://images.pexels.com/photos/1232931/pexels-photo-1232931.jpeg",
     "https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg",
-    "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg",
+    // "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg",
+    "images/gold.jpeg"
   ];
 
   // Auto-slide effect
