@@ -50,7 +50,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+    <section id="#services" className="py-20 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">

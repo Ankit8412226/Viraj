@@ -114,14 +114,14 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-amber-500 mt-1" />
                 <div className="text-gray-300">
-                  <p>123 Jewelry Street, Gold Market</p>
-                  <p>Zaveri Bazaar, Mumbai - 400001</p>
+                  <p>SHOP: O-14, LAJPAT NAGAR - II, NEAR GOLDEN DRAGON RESTAURANT,</p>
+                  <p> NEW DELHI - 110024</p>
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-amber-500" />
-                <span className="text-gray-300">+91-9876543210</span>
+                <span className="text-gray-300">+91-9350564449</span>
               </div>
               
               <div className="flex items-center space-x-3">

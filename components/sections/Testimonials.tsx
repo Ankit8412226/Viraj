@@ -7,22 +7,22 @@ export default function Testimonials() {
   const testimonials = [
     {
       name: "Priya Sharma",
-      location: "Andheri, Mumbai",
+      location: "Gurugram, Gurgaon",
       rating: 5,
       text: "Viraj Jewellers saved me during a family emergency. Their doorstep service was incredibly convenient, and they offered the best rates in the market. Highly recommended!",
       loan: "Gold Loan - ₹2,50,000"
     },
     {
       name: "Rajesh Patel",
-      location: "Borivali, Mumbai",
-      rating: 5,
+      location: "Lajpat Nagar, New-Delhi",
+      rating: 4,
       text: "Professional service and transparent process. They explained everything clearly and processed my diamond loan within 15 minutes. Excellent experience!",
       loan: "Diamond Loan - ₹5,00,000"
     },
     {
       name: "Meera Iyer",
-      location: "Bandra, Mumbai",
-      rating: 5,
+      location: "Noida Sector-62, Noida",
+      rating: 4,
       text: "I've been their customer for 5 years now. Their team is trustworthy, rates are competitive, and the jewelry is always returned in perfect condition.",
       loan: "Silver Loan - ₹1,80,000"
     }

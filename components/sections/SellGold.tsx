@@ -52,7 +52,7 @@ export default function SellGoldPage() {
   ];
 
   return (
-    <div id='sell-gold' className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 ">
+    <div id='#sell-gold' className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 ">
       {/* Header */}
       <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">

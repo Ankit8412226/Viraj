@@ -11,7 +11,7 @@ export default function Contact() {
     {
       icon: <Phone className="h-6 w-6 text-amber-600" />,
       title: "Phone",
-      details: ["+91-9876543210", "+91-9876543211"],
+      details: ["+91-9350564449", "+91-9350564449"],
       action: "Call Now"
     },
     {
@@ -23,7 +23,7 @@ export default function Contact() {
     {
       icon: <MapPin className="h-6 w-6 text-amber-600" />,
       title: "Office Address",
-      details: ["123 Jewelry Street, Gold Market", "Zaveri Bazaar, Mumbai - 400001"],
+      details: ["SHOP: O-14, LAJPAT NAGAR - II, NEAR GOLDEN DRAGON RESTAURANT,", "NEW DELHI - 110024"],
       action: "Get Directions"
     }
   ];
@@ -44,7 +44,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-amber-50 to-amber-100">
+    <section id="#contact" className="py-20 bg-gradient-to-b from-amber-50 to-amber-100">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">

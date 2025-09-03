@@ -1,39 +1,74 @@
-'use client';
+"use client";
 
-import { Target, Eye, Users, Award, TrendingUp, Heart } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Target, Eye, Users, Award, TrendingUp, Heart } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function About() {
   const stats = [
-    { number: "38+", label: "Years of Trust", icon: <Award className="h-6 w-6" /> },
-    { number: "50K+", label: "Happy Customers", icon: <Users className="h-6 w-6" /> },
-    { number: "₹100Cr+", label: "Loans Disbursed", icon: <TrendingUp className="h-6 w-6" /> },
-    { number: "99.9%", label: "Customer Satisfaction", icon: <Heart className="h-6 w-6" /> }
+    {
+      number: "38+",
+      label: "Years of Trust",
+      icon: <Award className="h-6 w-6" />,
+    },
+    {
+      number: "50K+",
+      label: "Happy Customers",
+      icon: <Users className="h-6 w-6" />,
+    },
+    {
+      number: "₹100Cr+",
+      label: "Loans Disbursed",
+      icon: <TrendingUp className="h-6 w-6" />,
+    },
+    {
+      number: "99.9%",
+      label: "Customer Satisfaction",
+      icon: <Heart className="h-6 w-6" />,
+    },
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+    <section
+      id="#about"
+      className="py-20 bg-gradient-to-b from-amber-50 to-white"
+    >
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-800 mb-4">
-            About <span className="bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">Viraj Jewellers</span>
+            About{" "}
+            <span className="bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">
+              Viraj Jewellers
+            </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A legacy of trust, transparency, and excellence in jewelry loans for over three decades.
+            <strong>
+            One of the India’s most prominent and trusted company
+            <strong className="text-[#ffaa00]"> is viraj jewellars . We provide various facilities to our clients such as getting back
+            their pledged gold, precise evaluation for their jewelry, cash for
+            gold and many other client friendly services.</strong>
+            
+          </strong>
           </p>
         </div>
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
-            <Card key={stat.label} className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-amber-50 border border-amber-200">
+            <Card
+              key={stat.label}
+              className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-amber-50 border border-amber-200"
+            >
               <CardContent className="p-6">
                 <div className="flex justify-center mb-3 text-amber-600">
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-gray-800 mb-2">{stat.number}</div>
-                <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-3xl font-bold text-gray-800 mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-sm text-gray-600 font-medium">
+                  {stat.label}
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -42,15 +77,20 @@ export default function About() {
         {/* Story Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-gray-800 font-playfair">Our Heritage</h3>
+            <h3 className="text-3xl font-bold text-gray-800 font-playfair">
+              Our Heritage
+            </h3>
             <p className="text-gray-600 leading-relaxed text-lg">
-              Founded in 1985 by Mr. Viraj Shah, Viraj Jewellers began as a small jewelry store with a simple mission: 
-              to help people unlock the value of their precious jewelry when they need it most.
+              Founded in 1985 by Mr. Viraj Shah, Viraj Jewellers began as a
+              small jewelry store with a simple mission: to help people unlock
+              the value of their precious jewelry when they need it most.
             </p>
             <p className="text-gray-600 leading-relaxed text-lg">
-              Over the decades, we've grown into one of the most trusted names in jewelry loans, serving thousands 
-              of families across Mumbai and beyond. Our commitment to fair pricing, transparent processes, and 
-              exceptional customer service has made us the preferred choice for jewelry loans.
+              Over the decades, we've grown into one of the most trusted names
+              in jewelry loans, serving thousands of families across Mumbai and
+              beyond. Our commitment to fair pricing, transparent processes, and
+              exceptional customer service has made us the preferred choice for
+              jewelry loans.
             </p>
           </div>
           <div className="relative">
@@ -77,9 +117,10 @@ export default function About() {
                 <h3 className="text-2xl font-bold">Our Mission</h3>
               </div>
               <p className="text-amber-100 leading-relaxed text-lg">
-                To provide accessible, transparent, and secure financial solutions through jewelry loans, 
-                helping our customers achieve their immediate financial goals while preserving the 
-                sentimental value of their precious possessions.
+                To provide accessible, transparent, and secure financial
+                solutions through jewelry loans, helping our customers achieve
+                their immediate financial goals while preserving the sentimental
+                value of their precious possessions.
               </p>
             </CardContent>
           </Card>
@@ -91,9 +132,10 @@ export default function About() {
                 <h3 className="text-2xl font-bold">Our Vision</h3>
               </div>
               <p className="text-yellow-100 leading-relaxed text-lg">
-                To become India's most trusted and innovative jewelry loan provider, known for our 
-                customer-first approach, cutting-edge technology, and commitment to financial 
-                inclusion and empowerment.
+                To become India's most trusted and innovative jewelry loan
+                provider, known for our customer-first approach, cutting-edge
+                technology, and commitment to financial inclusion and
+                empowerment.
               </p>
             </CardContent>
           </Card>
