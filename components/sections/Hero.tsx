@@ -18,7 +18,7 @@ export default function Hero({ scrollY }: HeroProps) {
     "https://images.pexels.com/photos/1232931/pexels-photo-1232931.jpeg",
     "https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg",
     // "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg",
-    "images/gold.jpeg"
+    "images/gold.jpeg",
   ];
 
   // Auto-slide effect
@@ -74,24 +74,22 @@ export default function Hero({ scrollY }: HeroProps) {
         <div className="absolute top-1/6 right-1/2 w-1 h-1 bg-amber-200 rounded-full animate-ping shadow-lg"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-24 sm:pt-28 lg:pt-36 pb-16 lg:pb-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-white space-y-8 text-center md:text-left">
-            <div className="space-y-6 animate-in fade-in-50 slide-in-from-bottom-4 duration-700">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight drop-shadow-2xl">
-                <span className="block text-amber-100 drop-shadow-lg animate-in slide-in-from-left-8 duration-700">
-                  Transform Your
-                </span>
-                <span className="block bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg animate-in slide-in-from-right-8 duration-700 delay-150">
+          <div className="text-white space-y-6 sm:space-y-8 text-center md:text-left max-w-2xl mx-auto md:mx-0">
+            <div className="space-y-4 sm:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug sm:leading-tight drop-shadow-2xl">
+                <span className="block text-amber-100">Transform Your</span>
+                <span className="block bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
                   Precious Jewelry
                 </span>
-                <span className="block text-yellow-300 font-extrabold drop-shadow-lg animate-in slide-in-from-left-8 duration-700 delay-300">
+                <span className="block text-yellow-300 font-extrabold">
                   Into Instant Cash
                 </span>
               </h1>
 
-              <p className="text-xl text-amber-100 leading-relaxed max-w-lg mx-auto md:mx-0 drop-shadow-lg animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-150">
+              <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto md:mx-0">
                 Premium gold loans, jewelry buying, and expert valuation
                 services. Your trusted partner for precious metal transactions
                 since 1985.
@@ -99,7 +97,7 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-6 justify-center md:justify-start animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-300">
+            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-300">
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-yellow-300/50 shadow-lg">
                 <Shield className="h-5 w-5 text-yellow-300" />
                 <span className="text-sm font-medium drop-shadow-sm">

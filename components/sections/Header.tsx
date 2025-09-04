@@ -66,10 +66,10 @@ export default function Header() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div
-            className="flex items-center space-x-3 cursor-pointer"
+            className="flex items-center space-x-2 cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
-            <div className="relative group w-28 h-28 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-700 p-[3px] shadow-2xl hover:shadow-gold transition-all duration-500">
+            <div className="relative group w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-700 p-[2px] md:p-[3px] shadow-xl md:shadow-2xl hover:shadow-gold transition-all duration-500">
               <div className="w-full h-full rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/imageViraj.jpg"
@@ -79,16 +79,16 @@ export default function Header() {
               </div>
             </div>
 
-            <div>
+            <div className="hidden sm:block">
               <h1
-                className={`text-2xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent ${
+                className={`text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent ${
                   isScrolled ? "" : "text-white"
                 }`}
               >
                 Viraj Jewellers
               </h1>
               <p
-                className={`text-sm ${
+                className={`text-xs md:text-sm ${
                   isScrolled ? "text-gray-600" : "text-yellow-100"
                 }`}
               >

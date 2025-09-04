@@ -95,7 +95,7 @@ export default function Testimonials() {
                 Get Free Evaluation
               </button>
               <button className="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-amber-700 transition-all duration-300">
-                Call Now: +91-9876543210
+                Call Now: +91-9810100561
               </button>
             </div>
           </div>

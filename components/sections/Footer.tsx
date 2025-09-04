@@ -33,9 +33,9 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: <Facebook className="h-5 w-5" />, href: '#', name: 'Facebook' },
+    { icon: <Facebook className="h-5 w-5" />, href: 'https://www.facebook.com/CashforgoldIndelhi', name: 'Facebook' },
     { icon: <Twitter className="h-5 w-5" />, href: '#', name: 'Twitter' },
-    { icon: <Instagram className="h-5 w-5" />, href: '#', name: 'Instagram' },
+    { icon: <Instagram className="h-5 w-5" />, href: 'https://www.instagram.com/cashforgold_delhi/#', name: 'Instagram' },
     { icon: <Linkedin className="h-5 w-5" />, href: '#', name: 'LinkedIn' },
   ];
 
@@ -126,7 +126,7 @@ export default function Footer() {
               
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-amber-500" />
-                <span className="text-gray-300">info@virajjewellers.com</span>
+                <span className="text-gray-300">cashforgolddelhi@gmail.com</span>
               </div>
               
               <div className="flex items-start space-x-3">

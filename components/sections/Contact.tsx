@@ -32,7 +32,7 @@ export default function Contact() {
     {
       icon: <Mail className="h-6 w-6 text-amber-600" />,
       title: "Email",
-      details: ["info@virajjewellers.com", "loans@virajjewellers.com"],
+      details: ["cashforgolddelhi@gmail.com", "cashforgolddelhi@gmail.com"],
       action: "Send Email"
     },
     {
