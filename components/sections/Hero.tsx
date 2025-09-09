@@ -17,7 +17,6 @@ export default function Hero({ scrollY }: HeroProps) {
   const jewelryImages = [
     "https://images.pexels.com/photos/1232931/pexels-photo-1232931.jpeg",
     "https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg",
-    // "https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg",
     "images/gold.jpeg",
   ];
 
@@ -58,7 +57,7 @@ export default function Hero({ scrollY }: HeroProps) {
             />
           </div>
         ))}
-        {/* Golden Overlay */}
+        {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-900/40 via-yellow-800/30 to-orange-900/40"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent"></div>
         <div className="absolute inset-0 bg-black/20"></div>
@@ -71,13 +70,13 @@ export default function Hero({ scrollY }: HeroProps) {
         <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
         <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-amber-400 rounded-full animate-ping shadow-lg"></div>
         <div className="absolute top-3/4 left-1/2 w-3 h-3 bg-yellow-500 rounded-full animate-pulse shadow-lg"></div>
-        <div className="absolute top-1/6 right-1/2 w-1 h-1 bg-amber-200 rounded-full animate-ping shadow-lg"></div>
+        <div className="absolute top-[15%] right-1/2 w-1 h-1 bg-amber-200 rounded-full animate-ping shadow-lg"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-24 sm:pt-28 lg:pt-36 pb-16 lg:pb-24">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-20 sm:pt-28 lg:pt-36 pb-12 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-white space-y-6 sm:space-y-8 text-center md:text-left max-w-2xl mx-auto md:mx-0">
+          <div className="text-white space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <div className="space-y-4 sm:space-y-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug sm:leading-tight drop-shadow-2xl">
                 <span className="block text-amber-100">Transform Your</span>
@@ -89,7 +88,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto md:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto lg:mx-0">
                 Premium gold loans, jewelry buying, and expert valuation
                 services. Your trusted partner for precious metal transactions
                 since 1985.
@@ -97,60 +96,60 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-300">
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-yellow-300/50 shadow-lg">
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
                 <Shield className="h-5 w-5 text-yellow-300" />
-                <span className="text-sm font-medium drop-shadow-sm">
+                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
                   RBI Registered
                 </span>
               </div>
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-yellow-300/50 shadow-lg">
+              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
                 <Clock className="h-5 w-5 text-yellow-300" />
-                <span className="text-sm font-medium drop-shadow-sm">
+                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
                   15 Min Processing
                 </span>
               </div>
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-4 py-2 border border-yellow-300/50 shadow-lg">
+              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
                 <Award className="h-5 w-5 text-yellow-300" />
-                <span className="text-sm font-medium drop-shadow-sm">
+                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
                   40+ Years Legacy
                 </span>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-500">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
                 onClick={() => scrollToSection("loan-calculator")}
-                className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50 cursor-pointer"
+                className="flex justify-center items-center bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50"
               >
                 Calculate Loan Amount
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button
                 size="lg"
                 onClick={() => scrollToSection("sell-gold")}
-                className="bg-white/30 backdrop-blur-md border-2 border-yellow-300 text-yellow-100 hover:bg-yellow-400 hover:text-amber-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 cursor-pointer shadow-lg"
+                className="flex justify-center items-center bg-white/30 backdrop-blur-md border-2 border-yellow-300 text-yellow-100 hover:bg-yellow-400 hover:text-amber-900 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 shadow-lg"
               >
                 Sell Old Gold
               </Button>
             </div>
 
             {/* Additional Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-700">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
                 onClick={() => scrollToSection("doorstep-service")}
-                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl cursor-pointer"
+                className="flex justify-center items-center bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-xl"
               >
                 Schedule Home Visit
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button
                 size="lg"
                 onClick={() => scrollToSection("gold-check")}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold px-8 py-4 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-xl cursor-pointer"
+                className="flex justify-center items-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-xl"
               >
                 Check Gold Value
               </Button>
@@ -158,54 +157,41 @@ export default function Hero({ scrollY }: HeroProps) {
 
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
-              <div
-                onClick={() => scrollToSection("loan-calculator")}
-                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
-                  <span className="text-2xl">🏅</span>
+              {[
+                { label: "Gold Loans", icon: "🏅", section: "loan-calculator" },
+                { label: "Silver Loans", icon: "⚪", section: "services" },
+                { label: "Diamond Loans", icon: "💎", section: "services" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => scrollToSection(item.section)}
+                  className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
+                >
+                  <div className="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-2 sm:mb-3 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center group-hover:scale-110 shadow-lg transition-all">
+                    <span className="text-lg sm:text-2xl">{item.icon}</span>
+                  </div>
+                  <p className="text-xs sm:text-sm font-medium text-amber-200 drop-shadow-sm">
+                    {item.label}
+                  </p>
                 </div>
-                <p className="text-sm font-medium text-amber-200 drop-shadow-sm">
-                  Gold Loans
-                </p>
-              </div>
-              <div
-                onClick={() => scrollToSection("services")}
-                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-gray-200 to-gray-400 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
-                  <span className="text-2xl">⚪</span>
-                </div>
-                <p className="text-sm font-medium text-amber-200 drop-shadow-sm">
-                  Silver Loans
-                </p>
-              </div>
-              <div
-                onClick={() => scrollToSection("services")}
-                className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 shadow-lg">
-                  <span className="text-2xl">💎</span>
-                </div>
-                <p className="text-sm font-medium text-amber-200 drop-shadow-sm">
-                  Diamond Loans
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Right Content - Live Market Rates */}
-          <div className="lg:pl-8">
+          <div className="w-full">
             <Card className="bg-white/95 backdrop-blur-sm border border-yellow-200 shadow-2xl">
               <CardHeader className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white rounded-t-lg">
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <TrendingUp className="h-6 w-6 mr-3" />
+                <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
+                  <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
                   Live Market Rates
                 </CardTitle>
-                <p className="text-amber-100">Updated September 2, 2025</p>
+                <p className="text-xs sm:text-sm text-amber-100">
+                  Updated September 2, 2025
+                </p>
               </CardHeader>
-              <CardContent className="p-6 space-y-4">
-                <div className="text-sm text-gray-600 mb-4 text-center">
+              <CardContent className="p-4 sm:p-6 space-y-4">
+                <div className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 text-center">
                   <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                   Live Rates • Per gram prices
                 </div>
@@ -213,20 +199,22 @@ export default function Hero({ scrollY }: HeroProps) {
                 {marketRates.map((rate, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center p-4 rounded-lg bg-gradient-to-r from-amber-50 to-yellow-50 border border-yellow-200"
+                    className="flex justify-between items-center p-3 sm:p-4 rounded-lg bg-gradient-to-r from-amber-50 to-yellow-50 border border-yellow-200"
                   >
                     <div>
-                      <p className="font-semibold text-gray-800">
+                      <p className="font-semibold text-gray-800 text-sm sm:text-base">
                         {rate.metal}
                       </p>
-                      <p className="text-sm text-gray-600">Per gram</p>
+                      <p className="text-xs sm:text-sm text-gray-600">
+                        Per gram
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-amber-700">
+                      <p className="text-base sm:text-lg font-bold text-amber-700">
                         {rate.rate}
                       </p>
                       <p
-                        className={`text-sm font-medium ${
+                        className={`text-xs sm:text-sm font-medium ${
                           rate.trend === "up"
                             ? "text-green-600"
                             : "text-red-600"
@@ -241,20 +229,20 @@ export default function Hero({ scrollY }: HeroProps) {
                 <div className="pt-4 space-y-3">
                   <Button
                     onClick={() => scrollToSection("loan-calculator")}
-                    className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-3 rounded-lg transform transition-all duration-300 hover:scale-105 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2.5 sm:py-3 rounded-lg transition-all duration-300 hover:scale-105"
                   >
                     Get Loan Quote
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => scrollToSection("sell-gold")}
-                    className="w-full border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-3 rounded-lg transition-all duration-300 cursor-pointer"
+                    className="w-full border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-bold py-2.5 sm:py-3 rounded-lg transition-all duration-300"
                   >
                     Sell Your Jewelry
                   </Button>
                 </div>
 
-                <div className="text-center text-sm text-gray-600 pt-2">
+                <div className="text-center text-xs sm:text-sm text-gray-600 pt-2">
                   <p>
                     ✓ Best market rates • ✓ Instant valuation • ✓ Doorstep
                     service
@@ -263,7 +251,7 @@ export default function Hero({ scrollY }: HeroProps) {
 
                 {/* Real-time update indicator */}
                 <div className="text-center">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
+                  <div className="inline-flex items-center px-2.5 sm:px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] sm:text-xs font-medium">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                     Market prices updated live
                   </div>
@@ -274,66 +262,49 @@ export default function Hero({ scrollY }: HeroProps) {
         </div>
 
         {/* Features Banner */}
-        <div className="mt-20 grid md:grid-cols-4 gap-6">
-          <div
-            onClick={() => scrollToSection("loan-calculator")}
-            className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
-          >
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-              <span className="text-2xl">🏆</span>
+        <div className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            {
+              icon: "🏆",
+              title: "Best Rates",
+              desc: "Up to 85% of market value",
+              section: "loan-calculator",
+            },
+            {
+              icon: <Clock className="w-5 sm:w-6 h-5 sm:h-6" />,
+              title: "Quick Processing",
+              desc: "Get cash in 15 minutes",
+              section: "sell-gold",
+            },
+            {
+              icon: <Shield className="w-5 sm:w-6 h-5 sm:h-6" />,
+              title: "100% Secure",
+              desc: "RBI registered & insured",
+              section: "gold-check",
+            },
+            {
+              icon: "🚪",
+              title: "Doorstep Service",
+              desc: "We come to you",
+              section: "doorstep-service",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              onClick={() => scrollToSection(item.section)}
+              className="bg-white/30 backdrop-blur-md rounded-lg p-5 sm:p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
+            >
+              <div className="w-10 sm:w-12 h-10 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-xl sm:text-2xl">{item.icon}</span>
+              </div>
+              <h3 className="font-bold mb-1 sm:mb-2 text-yellow-200 drop-shadow-sm text-sm sm:text-base">
+                {item.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-amber-200 drop-shadow-sm">
+                {item.desc}
+              </p>
             </div>
-            <h3 className="font-bold mb-2 text-yellow-200 drop-shadow-sm">
-              Best Rates
-            </h3>
-            <p className="text-sm text-amber-200 drop-shadow-sm">
-              Up to 85% of market value
-            </p>
-          </div>
-
-          <div
-            onClick={() => scrollToSection("sell-gold")}
-            className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
-          >
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-              <Clock className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold mb-2 text-yellow-200 drop-shadow-sm">
-              Quick Processing
-            </h3>
-            <p className="text-sm text-amber-200 drop-shadow-sm">
-              Get cash in 15 minutes
-            </p>
-          </div>
-
-          <div
-            onClick={() => scrollToSection("gold-check")}
-            className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
-          >
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-              <Shield className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold mb-2 text-yellow-200 drop-shadow-sm">
-              100% Secure
-            </h3>
-            <p className="text-sm text-amber-200 drop-shadow-sm">
-              RBI registered & insured
-            </p>
-          </div>
-
-          <div
-            onClick={() => scrollToSection("doorstep-service")}
-            className="bg-white/30 backdrop-blur-md rounded-lg p-6 text-center text-white hover:bg-white/40 transition-all duration-300 border border-yellow-300/50 cursor-pointer transform hover:scale-105 shadow-lg"
-          >
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-              <span className="text-2xl">🚪</span>
-            </div>
-            <h3 className="font-bold mb-2 text-yellow-200 drop-shadow-sm">
-              Doorstep Service
-            </h3>
-            <p className="text-sm text-amber-200 drop-shadow-sm">
-              We come to you
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

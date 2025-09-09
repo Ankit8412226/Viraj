@@ -10,7 +10,7 @@ import {
   MessageSquare,
   Scale,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // WhatsApp SVG Icon Component
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -26,6 +26,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 export default function FloatingActions() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -46,13 +47,30 @@ export default function FloatingActions() {
   };
 
   const openWhatsApp = () => {
-    // Replace with your WhatsApp number (format: country code + number without + sign)
-    const phoneNumber = "9810100561"; // Update this with your actual WhatsApp number
+    const phoneNumber = "9810100561"; // Update with your actual WhatsApp number
     const message = encodeURIComponent(
       "Hi! I would like to know more about your gold loan services."
     );
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
+
+  // close when clicking outside MapPin
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setIsExpanded(false);
+      }
+    }
+    if (isExpanded) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isExpanded]);
 
   const actions = [
     {
@@ -88,13 +106,13 @@ export default function FloatingActions() {
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50" ref={wrapperRef}>
       {/* Main Floating Button */}
       <div className="hidden lg:block relative">
-        {/* WhatsApp Floating Icon */}
+        {/* WhatsApp Floating Icon (moved to middle) */}
         <Button
           onClick={openWhatsApp}
-          className="absolute -top-20 -right-0 -left-1 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-lg ring-2 ring-white 
+          className="fixed top-1/2 right-6 -translate-y-1/2 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-lg ring-2 ring-white 
              hover:scale-110 hover:shadow-xl hover:bg-green-700 transition-all duration-300 flex items-center justify-center animate-float"
           title="Chat on WhatsApp"
         >

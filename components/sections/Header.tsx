@@ -17,7 +17,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu after clicking and smooth scroll
   const handleSectionClick = (sectionId: string) => {
     const id = sectionId.startsWith("#") ? sectionId.slice(1) : sectionId;
     scrollToSection(id);
@@ -41,19 +40,19 @@ export default function Header() {
       }`}
     >
       {/* Top Info Bar */}
-      <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white text-sm py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+      <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white text-xs sm:text-sm py-2">
+        <div className="container mx-auto px-3 sm:px-4 flex flex-wrap justify-between items-center gap-2 sm:gap-0">
+          <div className="flex items-center gap-3 text-[11px] sm:text-sm">
+            <div className="flex items-center gap-1 sm:gap-2">
               <Phone className="h-4 w-4" />
               <span>+91-9810100561</span>
             </div>
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden md:flex items-center gap-1 sm:gap-2">
               <MapPin className="h-4 w-4" />
               <span>Lajpat Nagar, New Delhi</span>
             </div>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block text-xs sm:text-sm">
             <span className="animate-pulse">
               🔥 Best Gold Prices Today: ₹10,609/gram
             </span>
@@ -62,14 +61,14 @@ export default function Header() {
       </div>
 
       {/* Main Navigation */}
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
-            <div className="relative group w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-700 p-[2px] md:p-[3px] shadow-xl md:shadow-2xl hover:shadow-gold transition-all duration-500">
+            <div className="relative group w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-700 p-[2px] shadow-lg hover:shadow-gold transition-all duration-500">
               <div className="w-full h-full rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/imageViraj.jpg"
@@ -81,14 +80,14 @@ export default function Header() {
 
             <div className="hidden sm:block">
               <h1
-                className={`text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent ${
+                className={`text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent ${
                   isScrolled ? "" : "text-white"
                 }`}
               >
                 Viraj Jewellers
               </h1>
               <p
-                className={`text-xs md:text-sm ${
+                className={`text-xs sm:text-sm ${
                   isScrolled ? "text-gray-600" : "text-yellow-100"
                 }`}
               >
@@ -98,7 +97,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
               <button
                 key={item.name}
@@ -113,7 +112,7 @@ export default function Header() {
 
             <Button
               onClick={() => scrollToSection("sell-gold")}
-              className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-semibold px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer"
+              className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-semibold px-4 sm:px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer text-sm sm:text-base"
             >
               <DollarSign className="mr-2 h-4 w-4" />
               Sell Gold
@@ -143,12 +142,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-white rounded-lg shadow-xl border border-yellow-200 p-4">
+          <div className="md:hidden mt-3 bg-white rounded-lg shadow-xl border border-yellow-200 p-3 sm:p-4 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleSectionClick(item.href)}
-                className="block w-full text-left py-3 text-gray-700 hover:text-yellow-600 transition-colors duration-300 cursor-pointer font-medium"
+                className="block w-full text-left py-2 sm:py-3 text-gray-700 hover:text-yellow-600 transition-colors duration-300 cursor-pointer font-medium text-sm sm:text-base"
               >
                 {item.name}
               </button>
@@ -159,7 +158,7 @@ export default function Header() {
                 scrollToSection("sell-gold");
                 setIsMenuOpen(false);
               }}
-              className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2 rounded-full cursor-pointer"
+              className="w-full mt-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2 sm:py-3 rounded-full cursor-pointer text-sm sm:text-base"
             >
               <DollarSign className="mr-2 h-4 w-4" />
               Sell Gold
