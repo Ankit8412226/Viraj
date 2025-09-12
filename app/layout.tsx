@@ -18,9 +18,9 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title:
-    "Gold Loan Delhi NCR - Instant Cash Against Gold Jewelry | Lowest Interest Rates 2025 | Viraj Jewellers Lajpat Nagar",
+    "Cash For Gold Delhi NCR - Instant Cash Against Gold Jewelry | Lowest Interest Rates 2025 | Viraj Jewellers Lajpat Nagar",
   description:
-    "Get instant gold loan in Delhi NCR with lowest interest rates starting 9.5% p.a. Doorstep service in Lajpat Nagar, South Delhi. Gold loan calculator, quick approval in 15 minutes. Best gold loan rates per gram today at Viraj Jewellers.",
+    "Get instant cash for gold in Delhi NCR with lowest interest rates starting 9.5% p.a. Doorstep service in Lajpat Nagar, South Delhi. Gold loan calculator, quick approval in 15 minutes. Best gold loan rates per gram today at Viraj Jewellers.",
   icons: [
     {
       url: "/favicon.ico",
