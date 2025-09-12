@@ -279,7 +279,7 @@ export default function Hero({ scrollY }: HeroProps) {
             {
               icon: <Shield className="w-5 sm:w-6 h-5 sm:h-6" />,
               title: "100% Secure",
-              desc: "RBI registered & insured",
+              desc: "Authorize SBI Approval & insured",
               section: "gold-check",
             },
             {
