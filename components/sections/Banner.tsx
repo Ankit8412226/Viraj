@@ -12,7 +12,7 @@ const banners = [
   },
   {
     title: 'Free Door-Step Gold Services',
-    subtitle: 'Home visit for testing, selling and loan processing',
+    subtitle: 'Home visit for testing, selling and cash for gold processing',
     icon: <Shield className="h-8 w-8" />,
     color: 'from-blue-500 to-indigo-600'
   },

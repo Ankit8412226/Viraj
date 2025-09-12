@@ -4,29 +4,29 @@ import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Linkedin } fr
 
 export default function Footer() {
   const quickLinks = [
-    { name: 'Gold Loans', href: '#services' },
-    { name: 'Silver Loans', href: '#services' },
-    { name: 'Diamond Loans', href: '#services' },
+    { name: 'Cash For Gold', href: '#services' },
+    { name: 'Cash For Silver', href: '#services' },
+    { name: 'Cash For Diamond', href: '#services' },
     { name: 'Doorstep Service', href: '#contact' },
   ];
 
   const policies = [
     { name: 'Privacy Policy', href: '#' },
     { name: 'Terms & Conditions', href: '#' },
-    { name: 'Loan Agreement', href: '#' },
+    { name: 'Cash for Gold Agreement', href: '#' },
     { name: 'Refund Policy', href: '#' },
   ];
 
   const services = [
     {
-      title: 'Instant Cash Loans',
+      title: 'Instant Cash for gold',
       description: 'Get instant cash against your gold, silver, and diamond jewelry with competitive interest rates.',
       timing: 'Available 24/7',
       icon: <Clock className="h-6 w-6 text-white" />
     },
     {
       title: 'Doorstep Service',
-      description: 'Our experts visit your location for jewelry evaluation and loan processing at your convenience.',
+      description: 'Our experts visit your location for jewelry evaluation and cash for gold processing at your convenience.',
       timing: 'Mon-Sat: 9 AM - 8 PM',
       icon: <MapPin className="h-6 w-6 text-white" />
     }
@@ -55,7 +55,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              Your trusted partner for jewelry loans. We provide instant cash against gold, silver, and diamond jewelry with complete transparency and security.
+              Your trusted partner for cash for gold. We provide instant cash against gold, silver, and diamond jewelry with complete transparency and security.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -176,7 +176,7 @@ export default function Footer() {
             <div className="flex items-center space-x-4 text-sm text-gray-400">
               <span>Licensed Money Lender</span>
               <span>•</span>
-              <span>RBI Registered</span>
+              <span>Authorize SBI Approval</span>
               <span>•</span>
               <span>Insured Storage</span>
             </div>

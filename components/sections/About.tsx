@@ -17,7 +17,7 @@ export default function About() {
     },
     {
       number: "₹100Cr+",
-      label: "Loans Disbursed",
+      label: "Cash For Gold Disbursed",
       icon: <TrendingUp className="h-6 w-6" />,
     },
     {
@@ -87,10 +87,10 @@ export default function About() {
             </p>
             <p className="text-gray-600 leading-relaxed text-lg">
               Over the decades, we've grown into one of the most trusted names
-              in jewelry loans, serving thousands of families across Mumbai and
+              in cash for gold, serving thousands of families across Mumbai and
               beyond. Our commitment to fair pricing, transparent processes, and
               exceptional customer service has made us the preferred choice for
-              jewelry loans.
+              cash for gold.
             </p>
           </div>
           <div className="relative">
@@ -118,7 +118,7 @@ export default function About() {
               </div>
               <p className="text-amber-100 leading-relaxed text-lg">
                 To provide accessible, transparent, and secure financial
-                solutions through jewelry loans, helping our customers achieve
+                solutions through jewelry for cash for gold, helping our customers achieve
                 their immediate financial goals while preserving the sentimental
                 value of their precious possessions.
               </p>
@@ -132,7 +132,7 @@ export default function About() {
                 <h3 className="text-2xl font-bold">Our Vision</h3>
               </div>
               <p className="text-yellow-100 leading-relaxed text-lg">
-                To become India's most trusted and innovative jewelry loan
+                To become India's most trusted and innovative jewelry cash for gold
                 provider, known for our customer-first approach, cutting-edge
                 technology, and commitment to financial inclusion and
                 empowerment.

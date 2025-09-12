@@ -9,7 +9,7 @@ export default function Services() {
   const services = [
     {
       icon: <Coins className="h-12 w-12 text-yellow-600" />,
-      title: "Gold Loans",
+      title: "Cash For Gold",
       description: "Get instant cash against your gold jewelry and ornaments with competitive interest rates and flexible repayment options.",
       features: ["Up to 85% of gold value", "Lowest interest rates", "No hidden charges"],
       color: "from-yellow-500 to-amber-600",
@@ -19,16 +19,16 @@ export default function Services() {
       icon: <div className="h-12 w-12 rounded-full bg-gradient-to-br from-gray-400 to-slate-500 flex items-center justify-center">
         <Coins className="h-8 w-8 text-white" />
       </div>,
-      title: "Silver Loans",
-      description: "Quick cash loans against your silver jewelry, coins, and artifacts with transparent pricing and fast approval.",
+      title: "Cash For Silver",
+      description: "Quick cash against your silver jewelry, coins, and artifacts with transparent pricing and fast approval.",
       features: ["Quick 15-min approval", "Fair market rates", "Safe storage"],
       color: "from-gray-400 to-slate-600",
       action: () => scrollToSection("contact")
     },
     {
       icon: <Gem className="h-12 w-12 text-amber-600" />,
-      title: "Diamond Loans",
-      description: "Premium loans against certified diamonds and diamond jewelry with expert valuation and secure handling.",
+      title: "Cash For Diamond",
+      description: "Premium cash for diamond against certified diamonds and diamond jewelry with expert valuation and secure handling.",
       features: ["Expert valuation", "Premium rates", "Certified process"],
       color: "from-amber-500 to-yellow-600",
       action: () => scrollToSection("contact")
@@ -39,13 +39,13 @@ export default function Services() {
     {
       icon: <Home className="h-8 w-8 text-amber-600" />,
       title: "Doorstep Service",
-      description: "We come to your home for jewelry evaluation and loan processing for your convenience and security.",
+      description: "We come to your home for jewelry evaluation and cash fro gold processing for your convenience and security.",
       action: () => scrollToSection("doorstep-service")
     },
     {
       icon: <Clock className="h-8 w-8 text-amber-600" />,
       title: "Quick Processing",
-      description: "Get your loan approved and cash in hand within 15 minutes of jewelry verification.",
+      description: "Get your cash for gold approved and cash in hand within 15 minutes of jewelry verification.",
       action: () => scrollToSection("loan-calculator")
     },
     {
@@ -66,7 +66,7 @@ export default function Services() {
             Our <span className="bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">Premium Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transform your precious jewelry into instant cash with our trusted loan services.
+            Transform your precious jewelry into instant cash with our trusted cash for gold services.
             We offer the most competitive rates in the market with complete transparency.
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function Services() {
             Live Gold & Silver Rates
           </h3>
           <p className="text-yellow-100 mb-6 text-lg">
-            Get real-time market rates updated every 5 minutes for accurate loan valuations
+            Get real-time market rates updated every 5 minutes for accurate cash for gold valuations
           </p>
           <div className="flex items-center justify-center space-x-2 mb-6">
             <span className="inline-block w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
@@ -153,7 +153,7 @@ export default function Services() {
             className="bg-white text-amber-700 hover:bg-yellow-50 font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105"
           >
             <Calculator className="mr-2 h-5 w-5" />
-            Calculate Loan Amount
+            Calculate Cash For Gold Amount
           </Button>
         </div>
       </div>

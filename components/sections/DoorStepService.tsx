@@ -40,7 +40,7 @@ export default function DoorStepService() {
   const serviceTypes = [
     { value: 'gold-check', label: 'Gold Purity Testing & Valuation' },
     { value: 'gold-sell', label: 'Gold Selling Service' },
-    { value: 'loan', label: 'Gold Loan Application' }
+    { value: 'loan', label: 'Cash For Gold Application' }
   ];
 
   const timeSlots = [
@@ -105,7 +105,7 @@ export default function DoorStepService() {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get our expert services at your doorstep! Schedule a home visit for gold testing,
-            selling, or loan applications. No need to visit our store.
+            selling, or cash for gold applications. No need to visit our store.
           </p>
         </div>
 

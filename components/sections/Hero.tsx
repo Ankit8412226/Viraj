@@ -89,7 +89,7 @@ export default function Hero({ scrollY }: HeroProps) {
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto lg:mx-0">
-                Premium gold loans, jewelry buying, and expert valuation
+                Premium cash for gold, jewelry buying, and expert valuation
                 services. Your trusted partner for precious metal transactions
                 since 1985.
               </p>
@@ -100,7 +100,7 @@ export default function Hero({ scrollY }: HeroProps) {
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
                 <Shield className="h-5 w-5 text-yellow-300" />
                 <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-                  SBI Approved
+                  Authorize SBI Approval
                 </span>
               </div>
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
@@ -124,7 +124,7 @@ export default function Hero({ scrollY }: HeroProps) {
                 onClick={() => scrollToSection("loan-calculator")}
                 className="flex justify-center items-center bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-xl border border-yellow-400/50"
               >
-                Calculate Loan Amount
+                Calculate Cash For Gold Amount
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <Button
@@ -158,9 +158,9 @@ export default function Hero({ scrollY }: HeroProps) {
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
               {[
-                { label: "Gold Loans", icon: "🏅", section: "loan-calculator" },
-                { label: "Silver Loans", icon: "⚪", section: "services" },
-                { label: "Diamond Loans", icon: "💎", section: "services" },
+                { label: "Cash For Gold", icon: "🏅", section: "loan-calculator" },
+                { label: "Cash For Silver", icon: "⚪", section: "services" },
+                { label: "Cash For Diamond", icon: "💎", section: "services" },
               ].map((item, idx) => (
                 <div
                   key={idx}
@@ -231,7 +231,7 @@ export default function Hero({ scrollY }: HeroProps) {
                     onClick={() => scrollToSection("loan-calculator")}
                     className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-2.5 sm:py-3 rounded-lg transition-all duration-300 hover:scale-105"
                   >
-                    Get Loan Quote
+                    Get cash for gold Quote
                   </Button>
                   <Button
                     variant="outline"

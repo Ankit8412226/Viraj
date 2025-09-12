@@ -47,7 +47,7 @@ export default function Contact() {
     {
       icon: <Building className="h-8 w-8 text-amber-600" />,
       title: "Visit Our Office",
-      description: "Come to our secure office location for jewelry evaluation and loan processing.",
+      description: "Come to our secure office location for jewelry evaluation and cash for gold processing.",
       timing: "Mon-Sat: 10:00 AM - 7:00 PM"
     },
     {
@@ -180,7 +180,7 @@ export default function Contact() {
                       <SelectItem value="general">General Inquiry</SelectItem>
                       <SelectItem value="gold-check">Gold Check</SelectItem>
                       <SelectItem value="gold-sell">Gold Selling</SelectItem>
-                      <SelectItem value="loan">Loan Application</SelectItem>
+                      <SelectItem value="loan">Cash For Gold Application</SelectItem>
                       <SelectItem value="urgent">Urgent</SelectItem>
                     </SelectContent>
                   </Select>
@@ -284,8 +284,8 @@ export default function Contact() {
             {/* Emergency Contact */}
             <Card className="bg-gradient-to-r from-red-500 to-red-600 text-white border-none">
               <CardContent className="p-6 text-center">
-                <h4 className="font-bold text-xl mb-2">Emergency Loan Service</h4>
-                <p className="text-red-100 mb-4">Need urgent cash? We're available 24/7 for emergency loans</p>
+                <h4 className="font-bold text-xl mb-2">Emergency cash for gold Service</h4>
+                <p className="text-red-100 mb-4">Need urgent cash? We're available 24/7 for emergency cash for gold sevice</p>
                 <Button 
                   className="bg-white text-red-600 hover:bg-red-50 font-bold rounded-full"
                   onClick={() => window.open('tel:+919350564449')}

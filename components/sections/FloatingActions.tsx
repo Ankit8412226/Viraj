@@ -49,7 +49,7 @@ export default function FloatingActions() {
   const openWhatsApp = () => {
     const phoneNumber = "9810100561"; // Update with your actual WhatsApp number
     const message = encodeURIComponent(
-      "Hi! I would like to know more about your gold loan services."
+      "Hi! I would like to know more about your cash for gold services."
     );
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
@@ -88,7 +88,7 @@ export default function FloatingActions() {
     {
       icon: <Calculator className="h-5 w-5" />,
       label: "Loan Calc",
-      section: "loan-calculator",
+      section: "cash for gold-calculator",
       color: "from-purple-500 to-pink-600",
     },
     {
