@@ -81,7 +81,7 @@ export default function About() {
               Our Heritage
             </h3>
             <p className="text-gray-600 leading-relaxed text-lg">
-              Founded in 1985 by Mr. Viraj Shah, Viraj Jewellers began as a
+              Founded in 1985 by Mr. V. K. Garg, Viraj Jewellers began as a
               small jewelry store with a simple mission: to help people unlock
               the value of their precious jewelry when they need it most.
             </p>
