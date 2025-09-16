@@ -176,7 +176,7 @@ export default function Footer() {
             <div className="flex items-center space-x-4 text-sm text-gray-400">
               <span>Licensed Money Lender</span>
               <span>•</span>
-              <span>Authorize SBI Approval</span>
+              <span>Authorize SBI Approver</span>
               <span>•</span>
               <span>Insured Storage</span>
             </div>

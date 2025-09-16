@@ -100,7 +100,7 @@ export default function Hero({ scrollY }: HeroProps) {
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
                 <Shield className="h-5 w-5 text-yellow-300" />
                 <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-                  Authorize SBI Approval
+                  Authorize SBI Approver
                 </span>
               </div>
               <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
