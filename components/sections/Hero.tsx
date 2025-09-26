@@ -84,12 +84,12 @@ export default function Hero({ scrollY }: HeroProps) {
           <div className="text-white space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <div className="space-y-4 sm:space-y-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug sm:leading-tight drop-shadow-2xl">
-                <span className="block text-amber-100">Transform Your</span>
+                <span className="block text-amber-100">Cash for Gold</span>
                 <span className="block bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
-                  Precious Jewelry
+                  Lajpat Nagar, Delhi
                 </span>
                 <span className="block text-yellow-300 font-extrabold">
-                  Into Instant Cash
+                  Best Rates • Instant Payment
                 </span>
               </h1>
 
