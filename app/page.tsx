@@ -77,7 +77,7 @@ export default function Home() {
         <Contact />
       </div>
       {/* Map Embed on Homepage */}
-      <section className="mt-10 px-4">
+      <section className="mt-10 px-4 pb-8">
         <div className="mx-auto max-w-5xl h-80 w-full overflow-hidden rounded border">
           <iframe
             src="https://www.google.com/maps?q=Viraj+Jewellers+Lajpat+Nagar&output=embed"
