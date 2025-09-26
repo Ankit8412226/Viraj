@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { scrollToSection } from "@/lib/utils";
 import { ArrowRight, Award, Clock, Shield, TrendingUp } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -82,7 +81,7 @@ export default function Hero({ scrollY }: HeroProps) {
         <div className="absolute top-[15%] right-1/2 w-1 h-1 bg-amber-200 rounded-full animate-ping shadow-lg"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-20 sm:pt-28 lg:pt-36 pb-12 lg:pb-20">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-12 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="text-white space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
@@ -98,10 +97,13 @@ export default function Hero({ scrollY }: HeroProps) {
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto lg:mx-0">
-                Premium cash for gold, jewelry buying, and expert valuation
-                services. Your trusted partner for precious metal transactions
-                since 1985.
+                Premium cash for gold with transparent XRF testing, same-day payout, and best market-linked rates in Lajpat Nagar.
               </p>
+              <ul className="mt-2 text-amber-100/90 text-sm sm:text-base space-y-1 max-w-lg mx-auto lg:mx-0">
+                <li>• On-spot purity testing in your presence</li>
+                <li>• Instant cash / UPI / bank transfer</li>
+                <li>• Trusted since 1985 • Licensed & secure</li>
+              </ul>
             </div>
 
             {/* Trust Indicators - Updated with Click Handlers */}
@@ -109,37 +111,28 @@ export default function Hero({ scrollY }: HeroProps) {
 
 
 
-{/* Trust Indicators - Updated with Next Link */}
+{/* Trust Indicators */}
 <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
-  <Link
-    href="/authorized-approver"
-    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
-  >
+  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
     <Shield className="h-5 w-5 text-yellow-300" />
     <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-      Authorize SBI Approver
+      Authorized SBI Approver
     </span>
-  </Link>
+  </div>
 
-  <Link
-    href="/quick-processing"
-    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
-  >
+  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
     <Clock className="h-5 w-5 text-yellow-300" />
     <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
       15 Min Processing
     </span>
-  </Link>
+  </div>
 
-  <Link
-    href="/legacy-experience"
-    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
-  >
+  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
     <Award className="h-5 w-5 text-yellow-300" />
     <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
       40+ Years Legacy
     </span>
-  </Link>
+  </div>
 </div>
 
 

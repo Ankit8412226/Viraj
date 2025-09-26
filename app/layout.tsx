@@ -146,6 +146,12 @@ export default function RootLayout({
           areaServed: "IN",
           availableLanguage: ["en", "hi"],
         },
+        hasCredential: {
+          "@type": "EducationalOccupationalCredential",
+          name: "Authorized SBI Approver",
+          credentialCategory: "Professional Certification"
+        },
+        award: ["Authorized SBI Approver", "Trusted Since 1985"],
         sameAs: [
           "https://www.facebook.com/virajjewellers",
           "https://www.instagram.com/virajjewellers",
