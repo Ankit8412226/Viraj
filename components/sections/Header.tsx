@@ -40,18 +40,31 @@ export default function Header() {
       }`}
     >
       {/* Top Info Bar */}
+      {/* Top Info Bar */}
       <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-white text-xs sm:text-sm py-2">
         <div className="container mx-auto px-3 sm:px-4 flex flex-wrap justify-between items-center gap-2 sm:gap-0">
           <div className="flex items-center gap-3 text-[11px] sm:text-sm">
-            <div className="flex items-center gap-1 sm:gap-2">
+            {/* Phone Clickable */}
+            <a
+              href="tel:+919810100561"
+              className="flex items-center gap-1 sm:gap-2 hover:underline cursor-pointer"
+            >
               <Phone className="h-4 w-4" />
               <span>+91-9810100561</span>
-            </div>
-            <div className="hidden md:flex items-center gap-1 sm:gap-2">
+            </a>
+
+            {/* Map Clickable */}
+            <a
+              href="https://www.google.com/maps/place/Lajpat+Nagar,+New+Delhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-1 sm:gap-2 hover:underline cursor-pointer"
+            >
               <MapPin className="h-4 w-4" />
               <span>Lajpat Nagar, New Delhi</span>
-            </div>
+            </a>
           </div>
+
           <div className="hidden md:block text-xs sm:text-sm">
             <span className="animate-pulse">
               🔥 Best Gold Prices Today: ₹10,609/gram

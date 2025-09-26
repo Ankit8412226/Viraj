@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { scrollToSection } from "@/lib/utils";
 import { ArrowRight, Award, Clock, Shield, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface HeroProps {
   scrollY: number;
@@ -12,6 +14,7 @@ interface HeroProps {
 
 export default function Hero({ scrollY }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   // Jewelry images for sliding background
   const jewelryImages = [
@@ -27,6 +30,8 @@ export default function Hero({ scrollY }: HeroProps) {
     }, 4000);
     return () => clearInterval(timer);
   }, [jewelryImages.length]);
+
+  
 
   // Real-time market rates
   const marketRates = [
@@ -95,27 +100,44 @@ export default function Hero({ scrollY }: HeroProps) {
               </p>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-                <Shield className="h-5 w-5 text-yellow-300" />
-                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-                  Authorize SBI Approver
-                </span>
-              </div>
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-                <Clock className="h-5 w-5 text-yellow-300" />
-                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-                  15 Min Processing
-                </span>
-              </div>
-              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-                <Award className="h-5 w-5 text-yellow-300" />
-                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-                  40+ Years Legacy
-                </span>
-              </div>
-            </div>
+            {/* Trust Indicators - Updated with Click Handlers */}
+          
+
+
+
+{/* Trust Indicators - Updated with Next Link */}
+<div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+  <Link
+    href="/authorized-approver"
+    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
+  >
+    <Shield className="h-5 w-5 text-yellow-300" />
+    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
+      Authorize SBI Approver
+    </span>
+  </Link>
+
+  <Link
+    href="/quick-processing"
+    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
+  >
+    <Clock className="h-5 w-5 text-yellow-300" />
+    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
+      15 Min Processing
+    </span>
+  </Link>
+
+  <Link
+    href="/legacy-experience"
+    className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg cursor-pointer hover:bg-white/40 transition-all duration-300 transform hover:scale-105"
+  >
+    <Award className="h-5 w-5 text-yellow-300" />
+    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
+      40+ Years Legacy
+    </span>
+  </Link>
+</div>
+
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
@@ -158,7 +180,11 @@ export default function Hero({ scrollY }: HeroProps) {
             {/* Service Types */}
             <div className="grid grid-cols-3 gap-4 pt-8">
               {[
-                { label: "Cash For Gold", icon: "🏅", section: "loan-calculator" },
+                {
+                  label: "Cash For Gold",
+                  icon: "🏅",
+                  section: "loan-calculator",
+                },
                 { label: "Cash For Silver", icon: "⚪", section: "services" },
                 { label: "Cash For Diamond", icon: "💎", section: "services" },
               ].map((item, idx) => (

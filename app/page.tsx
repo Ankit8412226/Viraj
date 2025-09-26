@@ -4,7 +4,6 @@ import About from "@/components/sections/About";
 import Banner from "@/components/sections/Banner";
 import Contact from "@/components/sections/Contact";
 import DoorStepService from "@/components/sections/DoorStepService";
-import FloatingActions from "@/components/sections/FloatingActions";
 import Footer from "@/components/sections/Footer";
 import GoldCheck from "@/components/sections/GoldCheck";
 import Header from "@/components/sections/Header";
@@ -17,10 +16,18 @@ import { Toaster } from "@/components/ui/sonner";
 import { scrollToSection } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
+import { usePathname } from "next/navigation";
+
+// Extra standalone pages
+import AuthorizedApproverPage from "@/components/sections/AuthorizedApprover";
+import LegacyExperiencePage from "@/components/sections/LegacyExperiencePage";
+import QuickProcessingPage from "@/components/sections/QuickProcessingPage";
+import MapIconPage from "@/components/sections/MapiconPage";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -30,45 +37,59 @@ export default function Home() {
 
   useEffect(() => {
     (window as any).scrollToSection = scrollToSection;
-    const timer = setTimeout(() => setIsLoaded(true), 2000); 
+    const timer = setTimeout(() => setIsLoaded(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
   if (!isLoaded) {
-    return <Loading />; // ✅ Show loading screen
+    return <Loading />; // Loading screen
   }
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       <Header />
-      <Hero scrollY={scrollY} />
-      <Banner />
-      <div id="gold-check">
-        <GoldCheck />
-      </div>
-      <div id="doorstep-service">
-        <DoorStepService />
-      </div>
-      <div id="loan-calculator">
-        <LoanCalculatorPage />
-      </div>
-      <div id="sell-gold">
-        <SellGoldPage />
-      </div>
-      <div id="services">
-        <Services />
-      </div>
-      <div id="about">
-        <About />
-      </div>
-      <div id="testimonials">
-        <Testimonials />
-      </div>
-      <div id="contact">
-        <Contact />
-      </div>
+
+      {/* Show standalone page if route matches */}
+      {pathname === "/authorized-approver" ? (
+        <AuthorizedApproverPage />
+      ) : pathname === "/quick-processing" ? (
+        <QuickProcessingPage />
+      ) : pathname === "/legacy-experience" ? (
+        <LegacyExperiencePage />
+      ) : (
+        <>
+          {/* Normal Homepage */}
+          <Hero scrollY={scrollY} />
+          <Banner />
+          <div id="gold-check">
+            <GoldCheck />
+          </div>
+          <div id="doorstep-service">
+            <DoorStepService />
+          </div>
+          <div id="loan-calculator">
+            <LoanCalculatorPage />
+          </div>
+          <div id="sell-gold">
+            <SellGoldPage />
+          </div>
+          <div id="services">
+            <Services />
+          </div>
+          <div id="about">
+            <About />
+          </div>
+          <div id="testimonials">
+            <Testimonials />
+          </div>
+          <div id="contact">
+            <Contact />
+          </div>
+        </>
+      )}
+      
+      <MapIconPage/>
       <Footer />
-      <FloatingActions />
       <Toaster />
     </main>
   );
