@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { scrollToSection } from "@/lib/utils";
 import { ArrowRight, Award, Clock, Shield, TrendingUp } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface HeroProps {
   scrollY: number;
@@ -31,7 +32,7 @@ export default function Hero({ scrollY }: HeroProps) {
     return () => clearInterval(timer);
   }, [jewelryImages.length]);
 
-  
+
 
   // Real-time market rates
   const marketRates = [
@@ -55,10 +56,13 @@ export default function Hero({ scrollY }: HeroProps) {
               index === currentSlide ? "opacity-60" : "opacity-0"
             }`}
           >
-            <img
+            <Image
               src={image}
               alt={`Jewelry ${index + 1}`}
-              className="w-full h-full object-cover brightness-110 contrast-110 saturate-110"
+              fill
+              sizes="100vw"
+              priority={index === 0}
+              className="object-cover brightness-110 contrast-110 saturate-110"
             />
           </div>
         ))}
@@ -101,7 +105,7 @@ export default function Hero({ scrollY }: HeroProps) {
             </div>
 
             {/* Trust Indicators - Updated with Click Handlers */}
-          
+
 
 
 

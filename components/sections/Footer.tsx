@@ -1,13 +1,15 @@
 'use client';
 
-import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
 
 export default function Footer() {
   const quickLinks = [
-    { name: 'Cash For Gold', href: '#services' },
+    { name: 'Cash For Gold', href: '/services/cash-for-gold' },
     { name: 'Cash For Silver', href: '#services' },
     { name: 'Cash For Diamond', href: '#services' },
     { name: 'Doorstep Service', href: '#contact' },
+    { name: 'Best Gold Buyer in Lajpat Nagar', href: '/best-gold-buyer-lajpat-nagar' },
+    { name: 'Gold Rates Today', href: '/gold-rates-today' },
   ];
 
   const policies = [
@@ -118,17 +120,17 @@ export default function Footer() {
                   <p> NEW DELHI - 110024</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-amber-500" />
                 <span className="text-gray-300">+91-9810100561</span>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-amber-500" />
                 <span className="text-gray-300">cashforgolddelhi@gmail.com</span>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-amber-500 mt-1" />
                 <div className="text-gray-300">
@@ -145,7 +147,7 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-gray-700">
           <div className="grid md:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <div 
+              <div
                 key={service.title}
                 className="bg-gradient-to-r from-amber-600/20 to-yellow-600/20 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all duration-300 group"
               >
