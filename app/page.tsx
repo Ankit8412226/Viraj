@@ -13,10 +13,9 @@ import SellGoldPage from "@/components/sections/SellGold";
 import Services from "@/components/sections/Services";
 import Testimonials from "@/components/sections/Testimonials";
 import { Toaster } from "@/components/ui/sonner";
-import { scrollToSection } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import Loading from "./loading";
 import { usePathname } from "next/navigation";
+import { scrollToSection } from "@/lib/utils";
 
 // Extra standalone pages
 import AuthorizedApproverPage from "@/components/sections/AuthorizedApprover";
@@ -25,6 +24,14 @@ import QuickProcessingPage from "@/components/sections/QuickProcessingPage";
 import MapIconPage from "@/components/sections/MapiconPage";
 
 export default function Home() {
+  const pathname = usePathname(); // ✅ Correct way to get current route
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
@@ -68,8 +75,8 @@ export default function Home() {
           </div>
         </>
       )}
-      
-      <MapIconPage/>
+
+      <MapIconPage />
       <Footer />
       <Toaster />
     </main>
