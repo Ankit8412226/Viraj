@@ -25,25 +25,6 @@ import QuickProcessingPage from "@/components/sections/QuickProcessingPage";
 import MapIconPage from "@/components/sections/MapiconPage";
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    (window as any).scrollToSection = scrollToSection;
-    const timer = setTimeout(() => setIsLoaded(true), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isLoaded) {
-    return <Loading />; // Loading screen
-  }
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
