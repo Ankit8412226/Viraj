@@ -55,7 +55,7 @@ export default function Header() {
 
             {/* Map Clickable */}
             <a
-              href="https://www.google.com/maps/place/Lajpat+Nagar,+New+Delhi"
+              href="https://www.google.com/maps/dir//Viraj+Jewellers+-+Cash+for+Gold+Lajpat+Nagar+I+Cash+for+Gold+Delhi+I+Silver+buyers,+Gold+buyers+near+me,+Greater+Kailash+C-159,Roxy+chowk+Veer+Savarkar+Marg,+near+Chicago-Pizza,+near+Chicago-+Pizza,+Lajpat+Nagar+II+New+Delhi,+Delhi+110024/@30.9541397,75.7444184,14.25z/data=!4m8!4m7!1m0!1m5!1m1!1s0x390ce3b18dbf5fa7:0x9daa4984b8d451e9!2m2!1d77.2400167!2d28.5708028?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-1 sm:gap-2 hover:underline cursor-pointer"

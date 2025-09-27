@@ -7,6 +7,7 @@ import { ArrowRight, Award, Clock, Shield, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface HeroProps {
   scrollY: number;
@@ -30,8 +31,6 @@ export default function Hero({ scrollY }: HeroProps) {
     }, 4000);
     return () => clearInterval(timer);
   }, [jewelryImages.length]);
-
-
 
   // Real-time market rates
   const marketRates = [
@@ -84,7 +83,7 @@ export default function Hero({ scrollY }: HeroProps) {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 pt-16 sm:pt-20 lg:pt-24 pb-12 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-white space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+          <div className="text-white mt-14 space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <div className="space-y-4 sm:space-y-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug sm:leading-tight drop-shadow-2xl">
                 <span className="block text-amber-100">Cash for Gold</span>
@@ -97,7 +96,8 @@ export default function Hero({ scrollY }: HeroProps) {
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-amber-100 leading-relaxed max-w-md sm:max-w-lg mx-auto lg:mx-0">
-                Premium cash for gold with transparent XRF testing, same-day payout, and best market-linked rates in Lajpat Nagar.
+                Premium cash for gold with transparent XRF testing, same-day
+                payout, and best market-linked rates in Lajpat Nagar.
               </p>
               <ul className="mt-2 text-amber-100/90 text-sm sm:text-base space-y-1 max-w-lg mx-auto lg:mx-0">
                 <li>• On-spot purity testing in your presence</li>
@@ -108,33 +108,34 @@ export default function Hero({ scrollY }: HeroProps) {
 
             {/* Trust Indicators - Updated with Click Handlers */}
 
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+              {/* Clickable SBI Approver Badge */}
+              <Link href="/approver-sbi">
+                <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg hover:bg-white/40 hover:scale-105 transition-all duration-300 cursor-pointer group">
+                  <Shield className="h-5 w-5 text-yellow-300 group-hover:text-blue-400 transition-colors" />
+                  <span className="text-xs sm:text-sm font-medium drop-shadow-sm group-hover:text-blue-900 transition-colors">
+                    Authorized SBI Approver
+                  </span>
+                </div>
+              </Link>
 
+              {/* Non-clickable Processing Badge */}
+              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
+                <Clock className="h-5 w-5 text-yellow-300" />
+                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
+                  15 Min Processing
+                </span>
+              </div>
 
-
-{/* Trust Indicators */}
-<div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
-  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-    <Shield className="h-5 w-5 text-yellow-300" />
-    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-      Authorized SBI Approver
-    </span>
-  </div>
-
-  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-    <Clock className="h-5 w-5 text-yellow-300" />
-    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-      15 Min Processing
-    </span>
-  </div>
-
-  <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
-    <Award className="h-5 w-5 text-yellow-300" />
-    <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
-      40+ Years Legacy
-    </span>
-  </div>
-</div>
-
+              {/* Non-clickable Legacy Badge */}
+              <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg">
+                <Award className="h-5 w-5 text-yellow-300" />
+                <span className="text-xs sm:text-sm font-medium drop-shadow-sm">
+                  40+ Years Legacy
+                </span>
+              </div>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
