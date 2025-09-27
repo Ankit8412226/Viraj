@@ -111,7 +111,7 @@ export default function Hero({ scrollY }: HeroProps) {
             {/* Trust Indicators */}
             <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
               {/* Clickable SBI Approver Badge */}
-              <Link href="/approver-sbi">
+              <Link href="">
                 <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-yellow-300/50 shadow-lg hover:bg-white/40 hover:scale-105 transition-all duration-300 cursor-pointer group">
                   <Shield className="h-5 w-5 text-yellow-300 group-hover:text-blue-400 transition-colors" />
                   <span className="text-xs sm:text-sm font-medium drop-shadow-sm group-hover:text-blue-900 transition-colors">

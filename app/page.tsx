@@ -12,9 +12,11 @@ import LoanCalculatorPage from "@/components/sections/Loan";
 import SellGoldPage from "@/components/sections/SellGold";
 import Services from "@/components/sections/Services";
 import Testimonials from "@/components/sections/Testimonials";
+import FloatingActions from "@/components/sections/FloatingActions"; // ✅ Added
 import { Toaster } from "@/components/ui/sonner";
 import { scrollToSection } from "@/lib/utils";
 import { useEffect, useState } from "react";
+// import TestimonialsPage from "./testimonials/page";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -36,10 +38,14 @@ export default function Home() {
       <Banner />
       {/* Long-form content for better topical relevance */}
       <section className="mx-auto max-w-5xl px-4 py-10">
-        <h2 className="text-2xl font-bold text-gray-900">Why Choose Viraj Jewellers in Lajpat Nagar</h2>
+        <h2 className="text-2xl font-bold text-gray-900">
+          Why Choose Viraj Jewellers in Lajpat Nagar
+        </h2>
         <p className="mt-3 text-gray-700">
-          We provide transparent XRF testing in your presence, instant cash/UPI/bank transfer payment,
-          and best market-linked rates. Serving Lajpat Nagar, Nehru Place, CR Park, GK, Defence Colony, and South Delhi.
+          We provide transparent XRF testing in your presence, instant
+          cash/UPI/bank transfer payment, and best market-linked rates. Serving
+          Lajpat Nagar, Nehru Place, CR Park, GK, Defence Colony, and South
+          Delhi.
         </p>
         <ul className="mt-4 list-disc pl-6 text-gray-700 space-y-1">
           <li>Same-day payout with government-compliant KYC</li>
@@ -47,9 +53,21 @@ export default function Home() {
           <li>Trusted since 1985 with thousands of satisfied customers</li>
         </ul>
         <div className="mt-4 flex flex-wrap gap-3">
-          <a href="/best-gold-buyer-lajpat-nagar" className="rounded border px-4 py-2">Best Gold Buyer in Lajpat Nagar</a>
-          <a href="/gold-rates-today" className="rounded border px-4 py-2">Gold Rates Today</a>
-          <a href="/services/cash-for-gold" className="rounded border px-4 py-2">Cash for Gold</a>
+          <a
+            href="/best-gold-buyer-lajpat-nagar"
+            className="rounded border px-4 py-2"
+          >
+            Best Gold Buyer in Lajpat Nagar
+          </a>
+          <a href="/gold-rates-today" className="rounded border px-4 py-2">
+            Gold Rates Today
+          </a>
+          <a
+            href="/services/cash-for-gold"
+            className="rounded border px-4 py-2"
+          >
+            Cash for Gold
+          </a>
         </div>
       </section>
       <div id="gold-check">
@@ -90,7 +108,9 @@ export default function Home() {
         </div>
       </section>
       <Footer />
+      <FloatingActions /> {/* ✅ Floating button section added here */}
       <Toaster />
+      {/* <TestimonialsPage/> */}
     </main>
   );
 }

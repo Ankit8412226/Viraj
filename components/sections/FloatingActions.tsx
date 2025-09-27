@@ -72,53 +72,54 @@ export default function FloatingActions() {
     };
   }, [isExpanded]);
 
-  const actions = [
-    {
-      icon: <Scale className="h-5 w-5" />,
-      label: "Gold Check",
-      section: "gold-check",
-      color: "from-yellow-500 to-amber-600",
-    },
-    {
-      icon: <Home className="h-5 w-5" />,
-      label: "Home Visit",
-      section: "doorstep-service",
-      color: "from-blue-500 to-indigo-600",
-    },
-    {
-      icon: <Calculator className="h-5 w-5" />,
-      label: "Loan Calc",
-      section: "cash for gold-calculator",
-      color: "from-purple-500 to-pink-600",
-    },
-    {
-      icon: <DollarSign className="h-5 w-5" />,
-      label: "Sell Gold",
-      section: "sell-gold",
-      color: "from-green-500 to-emerald-600",
-    },
-    {
-      icon: <MessageSquare className="h-5 w-5" />,
-      label: "Contact",
-      section: "contact",
-      color: "from-red-500 to-pink-600",
-    },
-  ];
+  // const actions = [
+  //   {
+  //     icon: <Scale className="h-5 w-5" />,
+  //     label: "Gold Check",
+  //     section: "gold-check",
+  //     color: "from-yellow-500 to-amber-600",
+  //   },
+  //   {
+  //     icon: <Home className="h-5 w-5" />,
+  //     label: "Home Visit",
+  //     section: "doorstep-service",
+  //     color: "from-blue-500 to-indigo-600",
+  //   },
+  //   {
+  //     icon: <Calculator className="h-5 w-5" />,
+  //     label: "Loan Calc",
+  //     section: "cash for gold-calculator",
+  //     color: "from-purple-500 to-pink-600",
+  //   },
+  //   {
+  //     icon: <DollarSign className="h-5 w-5" />,
+  //     label: "Sell Gold",
+  //     section: "sell-gold",
+  //     color: "from-green-500 to-emerald-600",
+  //   },
+  //   {
+  //     icon: <MessageSquare className="h-5 w-5" />,
+  //     label: "Contact",
+  //     section: "contact",
+  //     color: "from-red-500 to-pink-600",
+  //   },
+  // ];
 
   return (
     <div className="fixed bottom-6 right-6 z-50" ref={wrapperRef}>
-      {/* Main Floating Button */}
-      <div className="hidden lg:block relative">
-        {/* WhatsApp Floating Icon (moved to middle) */}
-        <Button
-          onClick={openWhatsApp}
-          className="fixed top-1/2 right-6 -translate-y-1/2 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-lg ring-2 ring-white 
-             hover:scale-110 hover:shadow-xl hover:bg-green-700 transition-all duration-300 flex items-center justify-center animate-float"
-          title="Chat on WhatsApp"
-        >
-          <WhatsAppIcon className="h-6 w-6" />
-        </Button>
+      {/* ✅ Always show WhatsApp Floating Icon */}
+      <Button
+        onClick={openWhatsApp}
+        className="fixed right-6 bottom-6 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-lg ring-2 ring-white 
+           hover:scale-110 hover:shadow-xl hover:bg-green-700 transition-all duration-300 flex items-center justify-center animate-float"
+        title="Chat on WhatsApp"
+      >
+        <WhatsAppIcon className="h-6 w-6" />
+      </Button>
 
+      {/* ❌ Other Floating Buttons are commented */}
+      {/*
+      <div className="hidden lg:block relative">
         <Button
           onClick={() => setIsExpanded(!isExpanded)}
           className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
@@ -127,45 +128,22 @@ export default function FloatingActions() {
         </Button>
       </div>
 
-      {/* On small screens show two quick action buttons with gap */}
       <div className="flex lg:hidden gap-3">
-        <Button
-          onClick={() => scrollToSection("doorstep-service")}
-          className="w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-xl"
-          title="Home Visit"
-        >
+        <Button onClick={() => scrollToSection("doorstep-service")} className="w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-xl">
           <Home className="h-5 w-5" />
         </Button>
-        <Button
-          onClick={() => scrollToSection("contact")}
-          className="w-14 h-14 rounded-full bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-xl"
-          title="Contact"
-        >
+        <Button onClick={() => scrollToSection("contact")} className="w-14 h-14 rounded-full bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-xl">
           <MessageSquare className="h-5 w-5" />
-        </Button>
-        {/* WhatsApp button for mobile */}
-        <Button
-          onClick={openWhatsApp}
-          className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-xl"
-          title="WhatsApp"
-        >
-          <WhatsAppIcon className="h-5 w-5" />
         </Button>
       </div>
 
-      {/* Expanded Action Buttons */}
       {isExpanded && (
         <div className="absolute bottom-20 right-0 space-y-3">
           {actions.map((action, index) => (
             <Button
               key={action.section}
               onClick={() => scrollToSection(action.section)}
-              className={`w-14 h-14 rounded-full bg-gradient-to-r ${
-                action.color
-              } hover:shadow-lg text-white transform transition-all duration-300 hover:scale-110 animate-in slide-in-from-bottom-${
-                index + 1
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
+              className={`w-14 h-14 rounded-full bg-gradient-to-r ${action.color}`}
               title={action.label}
             >
               {action.icon}
@@ -174,16 +152,12 @@ export default function FloatingActions() {
         </div>
       )}
 
-      {/* Scroll to Top Button */}
       <div className="hidden lg:block">
-        <Button
-          onClick={scrollToTop}
-          className="mt-3 w-16 h-16 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white shadow-2xl transform transition-all duration-300 hover:scale-110"
-          title="Scroll to Top"
-        >
+        <Button onClick={scrollToTop} className="mt-3 w-16 h-16 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 text-white shadow-2xl">
           <ChevronUp className="h-6 w-6" />
         </Button>
       </div>
+      */}
     </div>
   );
 }
